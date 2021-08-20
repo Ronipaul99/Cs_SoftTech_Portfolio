@@ -12,7 +12,8 @@ const userData = [
         userCred:{
             email:"ronipaul9972@gmail.com",
             password:"Roni#8981",
-        }
+        },
+        activationStatus:true
     }
 ]
 
