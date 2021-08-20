@@ -15,7 +15,7 @@ const oAuth2Client = new google.auth.OAuth2(
 
 oAuth2Client.setCredentials({
    // refresh_token: "1//042tD5BJXpJrYCgYIARAAGAQSNwF-L9Iras945LqN-d38X9SCPeBjYFBarFZRNQb8diJmdIp-cSVLw0sNyJXjRox-xjU7UfJ1mbg"
-   refresh_token: "1//04buny3NnsJxDCgYIARAAGAQSNwF-L9Ir5kxxQLXXA7ywH5ipA97AcPjm9SjBS2iC9ZRc3_52JTcl5-9kBDMWoud6zJGUg6yrP5A"
+   refresh_token: "1//04LLUPqHRgP6vCgYIARAAGAQSNwF-L9IrdSJ1xwY-p2V22bWos1tsd1LUvZfinRkTo8b0Xcuv1YKsZnSv4GOXHO-rJsCqp48LyMU"
 });
 
 //test@cssoftech.com
@@ -25,18 +25,24 @@ auth_controller.sendMail = async (user)=>{
     const Emailtoken = await signAccessToken2(user.CS_U_Id)
     const link = 'http://localhost:3000/verifyRegistration/'+Emailtoken+"/"+user.CS_U_Id
 
-        return oAuth2Client.getAccessToken().then(response=>{
-            const accessToken = response.token
+        // return oAuth2Client.getAccessToken().then(response=>{
+        //     const accessToken = response.token
+        //     console.log(accessToken);
             const Transport = nodemailer.createTransport({
+                // service: 'gmail',
+                // auth: {  
+                //     type: "OAuth2",
+                //     user: "cssofttech.suport@gmail.com",
+                //     clientId: process.env.CLIENT_ID,
+                //     clientSecret: process.env.CLIENT_SECRET,
+                //     refreshToken: process.env.REFRESH_TOKEN,
+                //     accessToken: accessToken
+                // },
                 service: 'gmail',
-                auth: {  
-                    type: "OAuth2",
-                    user: "cssofttech.suport@gmail.com",
-                    clientId: process.env.CLIENT_ID,
-                    clientSecret: process.env.CLIENT_SECRET,
-                    refreshToken: process.env.REFRESH_TOKEN,
-                    accessToken: accessToken
-                },
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD
+                }
             })
             
             const mailOptions = {
@@ -58,9 +64,12 @@ auth_controller.sendMail = async (user)=>{
             return Transport.sendMail(mailOptions).then(result=>{
                 return result
             }).catch(err=>{
+                console.log("mail err");
                 console.log(err);
             })
-        })
+        // }).catch(err=>{
+        //     console.log("error1", err);
+        // })
            // return result
         
 }
