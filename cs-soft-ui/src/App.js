@@ -1,5 +1,4 @@
-import React from 'react';
-import './App.scss';
+import './App.css';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import Home from './components/Home'
 import About from './components/About';
@@ -15,7 +14,6 @@ function App() {
       <button className="btn btn-danger">LOGOUT</button>
     </div>
   );
-
 
   return (
     <div className="App">
@@ -44,19 +42,17 @@ function App() {
         </nav>
        
         <Switch>
-              
-              <Route  path="/s" component={Home}></Route>
-              <Route  path="/home" component={Home}></Route>
-              <Route  path="/About" component={About}></Route>
-              <Route  path="/Profile" component={Profile}></Route>
-              <Route  path="/login" component={Login}></Route>
-              <Route  path="/d" component={Dashboard}></Route>
-              <Route  path="/register" component={Register}></Route>
-              <Route path="/**" render={() => <Redirect to="/register" />}></Route>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/home" component={Home}></Route>
+          <Route exact path="/About" component={About}></Route>
+          <Route exact path="/Profile" component={Profile}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/register" component={Register}></Route>
+          <Route path="/**" render={() => <Redirect to="/register" />}></Route>
         </Switch>
       </Router>
       <footer className="bg-black text-center text-white-50">
-          Copyright &copy; Bidisha Poddar 2021
+          Copyright &copy; Cs Soft Tech 2021
       </footer>
     </div>
   );

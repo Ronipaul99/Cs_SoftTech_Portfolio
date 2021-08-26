@@ -6,7 +6,8 @@ const userDAO = require('../Model/userDAO')
 const userService = require('../services/UserService')
 const jwt = require('jsonwebtoken')
 const createError = require('http-errors')
-const {verifyAccessToken} = require('../Utilities/jwt_helper')
+const {verifyAccessToken} = require('../Utilities/jwt_helper');
+const { toolresults } = require('googleapis/build/src/apis/toolresults');
 
 router.get('/setupUserDB',(req,res,next)=>{
     setupUser.setupDb().then((data) => {
@@ -38,7 +39,8 @@ router.post('/Register',(req,res)=>{
     userService.Register(user).then(response=>{
       res.send(response)
     }).catch(err=>{
-      console.log(err);
+      res.send(err.message)
+      // console.log(err);
     })
 })
 

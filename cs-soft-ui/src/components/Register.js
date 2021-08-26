@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import Select from '@material-ui/core/Select';
-import './css/Login.scss'
+//import './css/Login.scss'
 import { makeStyles } from '@material-ui/core/styles';
 //form Import
-import { Controller } from "react-hook-form"
-import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-// password import
-import IconButton from '@material-ui/core/IconButton';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { OutlinedInput } from '@material-ui/core';
+import axios from 'axios';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,8 +42,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Register(props) {
     const classes = useStyles();
-    const [reg, setReg] = useState(false)
-    const [showPassword, setShowPassword] = useState(true)
+    const [response,setResponse] = useState({
+        valid:true,
+        errorMessage:''
+    })
     const [registrationForm, setRegistrationForm] = useState({
         root: {
             width: '100%',
@@ -84,11 +80,7 @@ function Register(props) {
         const name = event.target.name
         const value = event.target.value
 
-        // setRegistrationForm({
-        //     ...registrationForm, registrationFormData: {
-        //         [name]: value
-        //     }
-        // })
+       
         var data = registrationForm.registrationFormData;
         data[event.target.name] = value
         var reg = registrationForm
@@ -98,7 +90,25 @@ function Register(props) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(registrationForm.registrationFormData);
+        var FormData = registrationForm.registrationFormData
+        var URL = `http://localhost:3000/Register`
+        var obj = {
+            userProfile:{
+                userName:FormData.userName,
+                mobileNo:FormData.mobileNumber,
+                userType:FormData.userType
+            },
+            userCred:{
+                email:FormData.email,
+                password: FormData.password
+            }
+        }
+        //console.log(obj);
+        axios.post(URL,obj).then(Responsedata=>{
+            console.log(Responsedata);
+        }).catch(err=>{
+            console.log("err"+err);
+        })
     }
     const validateField = (fieldName, value) => {
         var message;
@@ -127,10 +137,10 @@ function Register(props) {
                 if (value === "") {
                     message = "Please Enter Your Mobile Number"
                 }
-                else if (!(String(value)[0] != "0")) {
+                else if (!(String(value)[0] !== "0")) {
                     message = "Should not Start With 0"
                 }
-                else if (!(value.length == 10)) {
+                else if (!(value.length === 10)) {
                     message = "Mobile Number should be 10 digits"
                 }
                 else message = ""
@@ -147,17 +157,17 @@ function Register(props) {
             default:
                 break;
         }
-        console.log(value, registrationForm.registrationFormData.password);
+        
         //Form err message set
         var err = registrationForm.formError;
         err[fieldName] = message
-        var login = registrationForm
-        login.formError = err;
-        setRegistrationForm(login)
+        var register = registrationForm
+        register.formError = err;
+        setRegistrationForm(register)
         // console.log(registrationForm.formError)
 
         //FormValid status set
-        if (message == "") {
+        if (message === "") {
             setRegistrationForm({
                 ...registrationForm, formValid: {
                     [fieldName]: false
@@ -190,28 +200,30 @@ function Register(props) {
                                 </div>
                                 <form onSubmit={handleSubmit} className={classes.root}>
                                     <div className="form-group first">
-                                        <FormControl margin="normal" required fullWidth
+                                        <FormControl margin="normal" required fullWidth variant="outlined"
                                             {...(registrationForm.formValid.userName && { error: true })}
                                         >
                                             <InputLabel htmlFor="userName">UserName</InputLabel>
-                                            <Input autoComplete="userName" autoFocus
+                                            <OutlinedInput autoComplete="userName" autoFocus
                                                 id="userName" type="text" name="userName"
                                                 defaultValue={registrationForm.registrationFormData.userName}
                                                 onChange={handleChange}
+                                                labelWidth={90}
                                             />
                                             {registrationForm.formValid.userName &&
                                                 <FormHelperText>{registrationForm.formError.userName}</FormHelperText>
                                             }
                                         </FormControl>
 
-                                        <FormControl margin="normal" required fullWidth
+                                        <FormControl margin="normal" required fullWidth variant="outlined"
                                             {...(registrationForm.formValid.mobileNumber && { error: true })}
                                         >
                                             <InputLabel htmlFor="mobileNumber">Mobile Number</InputLabel>
-                                            <Input name="mobileNumber" type="number"
+                                            <OutlinedInput name="mobileNumber" type="number"
                                                 id="mobileNumber"
                                                 autoComplete="mobile-number"
                                                 onChange={handleChange}
+                                                labelWidth={115}
                                                 defaultValue={registrationForm.registrationFormData.mobileNumber}
                                             />
                                             {registrationForm.formValid.mobileNumber &&
@@ -219,7 +231,7 @@ function Register(props) {
                                             }
                                         </FormControl>
 
-                                        <FormControl margin="normal" required fullWidth >
+                                        <FormControl margin="normal" required fullWidth variant="outlined">
                                             <InputLabel id="userType">User Type</InputLabel>
                                             <Select
                                                 labelId="userType"
@@ -227,7 +239,7 @@ function Register(props) {
                                                 defaultValue=""
                                                 name="userType"
                                                 onChange={handleChange}
-
+                                                labelWidth={80}
                                             >
                                                 <MenuItem value={''}></MenuItem>
                                                 <MenuItem value={'User'}>User</MenuItem>
@@ -237,45 +249,48 @@ function Register(props) {
 
                                         </FormControl>
 
-                                        <FormControl margin="normal" required fullWidth
+                                        <FormControl margin="normal" required fullWidth variant="outlined"
                                             {...(registrationForm.formValid.email && { error: true })}
                                         >
                                             <InputLabel htmlFor="email">Email Address</InputLabel>
-                                            <Input name="email" type="email"
+                                            <OutlinedInput name="email" type="email"
                                                 id="email"
                                                 autoComplete="email-address"
                                                 onChange={handleChange}
                                                 defaultValue={registrationForm.registrationFormData.email}
+                                                labelWidth={110}
                                             />
                                             {registrationForm.formValid.email &&
                                                 <FormHelperText>{registrationForm.formError.email}</FormHelperText>
                                             }
                                         </FormControl>
 
-                                        <FormControl margin="normal" required fullWidth
+                                        <FormControl margin="normal" required fullWidth variant="outlined"
                                             {...(registrationForm.formValid.password && { error: true })}
                                         >
                                             <InputLabel htmlFor="password">Password</InputLabel>
-                                            <Input name="password" type="password"
+                                            <OutlinedInput name="password" type="password"
                                                 id="password"
                                                 autoComplete="password"
                                                 onChange={handleChange}
                                                 defaultValue={registrationForm.registrationFormData.password}
+                                                labelWidth={80}
                                             />
                                             {registrationForm.formValid.password &&
                                                 <FormHelperText>{registrationForm.formError.password}</FormHelperText>
                                             }
                                         </FormControl>
-                                        {/* =============================================================================================== */}
-                                        <FormControl margin="normal" required fullWidth
+                                       
+                                        <FormControl margin="normal" required fullWidth variant="outlined"
                                             {...(registrationForm.formValid.passwordConfirmation && { error: true })}
                                         >
                                             <InputLabel htmlFor="passwordConfirmation">Confirm Password</InputLabel>
-                                            <Input name="passwordConfirmation" type="password"
+                                            <OutlinedInput name="passwordConfirmation" type="password"
                                                 id="passwordConfirmation"
                                                 autoComplete="passwordConfirmation"
                                                 onChange={handleChange}
                                                 defaultValue={registrationForm.registrationFormData.passwordConfirmation}
+                                                labelWidth={140}
                                             />
                                             {registrationForm.formValid.passwordConfirmation &&
                                                 <FormHelperText>{registrationForm.formError.passwordConfirmation}</FormHelperText>

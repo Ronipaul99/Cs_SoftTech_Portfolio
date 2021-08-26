@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 
 import './css/Login.scss'
 import { makeStyles } from '@material-ui/core/styles';
-
+import Register from './Register';
 
 //form Import
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Select } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -49,45 +50,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login() {
+function Login(props) {
   const classes = useStyles();
-  const [reg, setReg] = useState(false)
   const [showPassword, setShowPassword] = useState(true)
   const [loginForm, setLoginForm] = useState({
-    root: {
-      width: '100%',
-    },
+    
     formData: {
       email: '',
       password: '',
-
-
-    },
-    registrationFormData: {
-      email: '',
-      password: '',
-      userName:'',
-      mobileNumber:'',
-      userType:''
-
     },
     formError: {
       emailErr: "Wrong email",
       passwordErr: "Wrong password",
-      email: '',
-      password: '',
-      userName:'',
-      mobileNumber:'',
-      userType:''
     },
     formValid: {
       emailValid: false,
       passwordValid: false,
-      email: false,
-      password: false,
-      userName:false,
-      mobileNumber:false,
-      userType:false
     }
   })
   const handleClickShowPassword = () => {
@@ -102,27 +80,9 @@ function Login() {
     event.preventDefault();
   }
   const handelChange = (event) => {
-    const name = event.target.name
-    const value = event.target.value
-    // validateField(name,value)
-    var data = loginForm.formData
-    setLoginForm({...loginForm,formData:{
-      [name]:value
-    }})
-    validateField(name, value);
-    // data[name] = value
-    // setLoginForm(data);
+    
   }
-  const handleRegistration=(event)=>{
-    const name = event.target.name
-    const value = event.target.value
-    // validateField(name,value)
-    // var data = loginForm.formData
-    setLoginForm({...loginForm,registrationFormData:{
-      [name]:value
-    }})
-    validateField(name, value);
-  }
+  
   const validateField = (fieldName, value) => {
     var message;
 
@@ -137,69 +97,26 @@ function Login() {
         let passRegex = new RegExp(/^(?=.*[A-Z])(?=.*[!@#$&*%&])(?=.*[0-9])(?=.*[a-z]).{7,20}$/);
         value === "" ? message = "Please enter your password" : passRegex.test(value) ? message = "" : message = "At least one capital & small letter,one number,one special character"
         break
-    
-      case "userName":
-        if(value===""){
-          message="Please enter your Name"
-        }
-        else if(!(value.match(/^[a-zA-z]+([\s][a-zA-Z]+)*$/))){
-          message="Only alphabets. Should not start and end with space"
-        }
-        else message = ""
-        break
-
-      case "mobileNumber":
-        if(value===""){
-          message="Please Enter Your Mobile Number"
-        }
-        else if(!( String(value)[0]!="0")){
-          message="Should not Start With 0"
-        }
-        else if(!(value.length==10)){
-          message="Mobile Number should be 10 digits"
-        }
-        else message = ""
-        break
-
       default:
         break;
-    }
-    //Form err message set
-    // console.log(fieldName,message)
-    var err=loginForm.formError;
-    err[fieldName]=message
-    var login=loginForm
-    login.formError=err;
-    setLoginForm(login)
-    // console.log(loginForm.formError)
-   
-    //FormValid status set
-    if(message==""){
-      setLoginForm({...loginForm,formValid:{
-        [fieldName]:false
-      }})
-    }
-    else{
-      setLoginForm({...loginForm,formValid:{
-        [fieldName]:true
-      }})
-    }
-    
+    } 
   }
+
+  
   return (
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="undraw_remotely_2j6y.svg" alt="Image" class="img-fluid" />
+    <div className="content">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <img src="undraw_remotely_2j6y.svg" alt="Image" className="img-fluid" />
           </div>
-          {!reg ?
-            <div class="col-md-6 contents">
-              <div class="row justify-content-center">
-                <div class="col-md-8">
-                  <div class="mb-4">
+          
+            <div className="col-md-6 contents">
+              <div className="row justify-content-center">
+                <div className="col-md-8">
+                  <div className="mb-4">
                     <h3>Sign In</h3>
-                    <p class="mb-4">Please Login to your account with correct with correct email and password .</p>
+                    <p className="mb-4">Please Login to your account with correct with correct email and password .</p>
                   </div>
                   <form className={classes.root}>
                     <div className='col-12'>
@@ -250,116 +167,18 @@ function Login() {
                     </div>
 
 
-                    <div class="d-flex mb-5 align-items-center">
-                      <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                        <input type="checkbox" checked="checked" />
-                        <div class="control__indicator"></div>
-                      </label>
-                      <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+                    <div className="d-flex mb-5 align-items-center">
+                      <span className="ml-auto"><a href="#" className="forgot-pass">Forgot Password</a></span>
                     </div>
 
-                    <input type="submit" value="Log In" class="btn btn-block btn-primary" onClick={(e) => { e.preventDefault() }} />
-                    <span class="ml-auto"><button class="btn btn-link" onClick={(e) => { e.preventDefault(); setReg(true) }}>Create a new Account.</button></span>
+                    <input type="submit" value="Log In" className="btn btn-block btn-primary" onClick={(e) => { e.preventDefault() }} />
+                    <span className="ml-auto"><button className="btn btn-link" onClick={(e) => { e.preventDefault();props.history.push('/register')}}>Create a new Account.</button></span>
                   </form>
                 </div>
               </div>
 
             </div>
-            :
-            <div class="col-md-6 contents">
-              <div class="row justify-content-center">
-                <div class="col-md-8">
-                  <div class="mb-4">
-                    <h3>Sign Up</h3>
-                    <p class="mb-4">Once a new technology rolls over you, if you're not part of the steamroller, you're part of the road.</p>
-                  </div>
-                  <form>
-                    <div class="form-group first">
-                      <FormControl margin="normal" required fullWidth 
-                      {...(loginForm.formValid.userName && { error: true })}
-                      >
-                        <InputLabel htmlFor="userName">UserName</InputLabel>
-                        <Input autoComplete="userName" autoFocus
-                          id="userName" type="text" name="userName"
-                          value={loginForm.formData.userName}
-                          onChange={handleRegistration}
-                        />
-                        {loginForm.formValid.userName &&
-                          <FormHelperText>{loginForm.formError.userName}</FormHelperText>
-                        }
-                      </FormControl>
-
-                      <FormControl margin="normal" required fullWidth
-                      {...(loginForm.formValid.mobileNumber && { error: true })}
-                      >
-                        <InputLabel htmlFor="mobileNumber">Mobile Number</InputLabel>
-                        <Input name="mobileNumber" type="number"
-                          id="mobileNumber"
-                          autoComplete="mobile-number"
-                          onChange={handleRegistration}
-                          value={loginForm.formData.mobileNumber}
-                           />
-                           {loginForm.formValid.mobileNumber &&
-                          <FormHelperText>{loginForm.formError.mobileNumber}</FormHelperText>
-                        }
-                      </FormControl>
-
-                      <FormControl margin="normal" required fullWidth >
-                        <InputLabel id="userType">User Type</InputLabel>
-                        <Select
-                          labelId="userType"
-                          id="userType"
-                          value={loginForm.formData.userType}
-                          renderValue={(value) => `${value}`}
-                        >
-
-                          <MenuItem value={'User'}>User</MenuItem>
-                          <MenuItem value={'Admin'}>Admin</MenuItem>
-                          
-                        </Select>
-
-                      </FormControl>
-
-                      <FormControl margin="normal" required fullWidth
-                      {...(loginForm.formValid.email && { error: true, helperText: loginForm.formError.email })}
-                      >
-                        <InputLabel htmlFor="email">Email Address</InputLabel>
-                        <Input name="email" type="email"
-                          id="email"
-                          autoComplete="email-address"
-                          onChange={handleRegistration}
-                          value={loginForm.formData.email}
-                           />
-                      </FormControl>
-
-                      <FormControl margin="normal" required fullWidth
-                      {...(loginForm.formValid.password && { error: true })}
-                      >
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input name="password" type="password"
-                          id="password"
-                          autoComplete="password"
-                          onChange={handleRegistration}
-                          value={loginForm.formData.password}
-                           />
-                           {loginForm.formValid.password &&
-                          <FormHelperText>{loginForm.formError.password}</FormHelperText>
-                        }
-                      </FormControl>
-                    </div>
-
-
-
-                    <input type="submit" value="Register"  class="btn btn-block btn-primary" 
-                      disabled={!(!loginForm.formValid.userName && !loginForm.formValid.mobileNumber && !loginForm.formValid.password && !loginForm.formValid.email)}
-                    />
-                    <span class="ml-auto"><button class="btn btn-link" onClick={(event) => { event.preventDefault();handleSubmit(); setReg(false) }}>Already have an Account.</button></span>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-          }
+            
         </div>
       </div>
     </div>
