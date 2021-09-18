@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import { OutlinedInput } from '@material-ui/core';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,11 +44,8 @@ const useStyles = makeStyles((theme) => ({
 function Login(props) {
     const classes = useStyles();
     const [registrationForm, setRegistrationForm] = useState({
-        root: {
-            width: '100%',
-        },
         registrationFormData: {
-            email: '',
+            Email: '',
             password: '',
         },
         formError: {
@@ -59,6 +57,10 @@ function Login(props) {
             password: false,
         }
     })
+    const [errStatus , setErrStatus] = useState(null)
+    const [err , setErr] = useState(false)
+    const [Response , setResponse] = useState(null)
+
     const handleChange = (event) => {
         const name = event.target.name
         const value = event.target.value
@@ -72,6 +74,16 @@ function Login(props) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        const URL = "http://localhost:3000/login"
+        axios.post(URL , registrationForm.registrationFormData).then(response=>{
+           // console.log(response.data);
+            setResponse(response.data)
+            setErr(false)
+        }).catch(err=>{
+            const Err = err.message.split(" ")
+            setErrStatus(parseInt(Err[Err.length-1]))
+            setErr(true)
+        })
         console.log(registrationForm.registrationFormData);
     }
     const validateField = (fieldName, value) => {
@@ -118,8 +130,7 @@ function Login(props) {
 
     return (
         <div className="content">
-            {console.log(registrationForm)}
-            <div className="container">
+            <div className="container login-container">
                 <div className="row">
                     <div className="col-md-6">
                         <img src="undraw_remotely_2j6y.svg" alt="Image" className="img-fluid" />
@@ -127,9 +138,17 @@ function Login(props) {
                     <div className="col-md-6 contents">
                         <div className="row justify-content-center">
                             <div className="col-md-8">
-                                <div className="mb-4">
+                                <div className="mb-4 text-center">
                                     <h3>Sign In</h3>
-                                    <p className="mb-4">Please Login with your correct email and password</p>
+                                    <p className="mb-4 ">Please Login with your correct email and password</p>
+                                </div>
+                                <div>
+                                    {err && 
+                                     <small className="text-danger">
+                                         {errStatus=== 401 && "Wrong Email or Password"}
+                                         {errStatus === 402 && "Account Not Found"}
+                                     </small>
+                                    }
                                 </div>
                                 <form onSubmit={handleSubmit} className={classes.root}>
                                     <div className="form-group first">
@@ -138,12 +157,12 @@ function Login(props) {
                                             {...(registrationForm.formValid.email && { error: true })}
                                         >
                                             <InputLabel htmlFor="email">Email Address</InputLabel>
-                                            <OutlinedInput name="email" type="email"
-                                                id="email"
+                                            <OutlinedInput name="Email" type="email"
+                                                id="Email"
                                                 autoComplete="email-address"
                                                 onChange={handleChange}
                                                 defaultValue={registrationForm.registrationFormData.email}
-                                                labelWidth={110}
+                                                labelWidth={11}
                                             />
                                             {registrationForm.formValid.email &&
                                                 <FormHelperText>{registrationForm.formError.email}</FormHelperText>

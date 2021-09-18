@@ -9,7 +9,7 @@ userService.Register = (user) => {
     return userDAO.getUserByEmail(user.userCred.email).then(userData=>{
         var password=""
         if(userData){
-            const err = new Error("User already Exist with this email")
+            let err = new Error("User already Exist with this email")
             err.status = 401
             throw err
         }else {
@@ -21,14 +21,14 @@ userService.Register = (user) => {
                     user.CS_U_Id = CsUid
                     return userDAO.CreateUser(user).then(response=>{
                         if(!response){
-                            const err = new Error("Failed to register the user : "+user.userProfile.userName)
+                            let err = new Error("Failed to register the user : "+user.userProfile.userName)
                             err.status = 501
                             throw err
                         }else{
                             return auth_controller.sendMail(user).then(data=>{
                                 return data;
                             }).catch(err=>{
-                                console.log(err);
+                                throw err
                             })
                         }
                     }).catch(err=>{
@@ -49,25 +49,24 @@ userService.Register = (user) => {
 userService.login = (email , password) => {
     return userDAO.getUserByEmail(email).then(user=>{
         if(!user){
-            const err = new Error("Can't find user with this email: "+email)
-                err.status = 501
+            let err = new Error("Can't find user with this email: "+email)
+                err.status = 401
                 throw err
         }
         //console.log(user[0]);
         if(user[0].activationStatus!==1){
-            const err = new Error("Account Deactivated")
-                err.status = 502
+            let err = new Error("Account Deactivated")
+                err.status = 402
                 throw err
         }else if(user[0].activationStatus===1){
             return bcrypt.compare(password,user[0].userCred.password).then(result=>{
-                if(result) return user[0].userProfile
-                else{
-                    const err = new Error("Authentication failed wrong pasword")
-                    err.status = 503
+                if(result){
+                     return user[0].userProfile
+                }else{
+                    let err = new Error("Authentication failed wrong pasword")
+                    err.status = 401
                     throw err
                 }
-            }).catch(error=>{
-                console.log(error); 
             })
             
         }

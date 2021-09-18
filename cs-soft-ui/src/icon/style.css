@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'creation-soul';
+  src:  url('fonts/creation-soul.eot?36q4ei');
+  src:  url('fonts/creation-soul.eot?36q4ei#iefix') format('embedded-opentype'),
+    url('fonts/creation-soul.ttf?36q4ei') format('truetype'),
+    url('fonts/creation-soul.woff?36q4ei') format('woff'),
+    url('fonts/creation-soul.svg?36q4ei#creation-soul') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'creation-soul' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-instagram:before {
+  content: "\e912";
+}
+.icon-facebook:before {
+  content: "\e913";
+}
+.icon-linkedin:before {
+  content: "\e914";
+}
+.icon-twitter:before {
+  content: "\e915";
+}
+.icon-you-tube:before {
+  content: "\e916";
+}
+.icon-logo-shape:before {
+  content: "\e911";
+}
+.icon-quote:before {
+  content: "\e910";
+  color: #90daf1;
+}
+.icon-logistics-transportation:before {
+  content: "\e90b";
+}
+.icon-automotive:before {
+  content: "\e90c";
+}
+.icon-digital-marketing:before {
+  content: "\e90d";
+}
+.icon-e-commerce:before {
+  content: "\e90e";
+}
+.icon-e-learning:before {
+  content: "\e90f";
+}
+.icon-access:before {
+  content: "\e90a";
+}
+.icon-data-services .path1:before {
+  content: "\e902";
+  color: rgb(241, 116, 76);
+}
+.icon-data-services .path2:before {
+  content: "\e903";
+  margin-left: -1.048828125em;
+  color: rgb(25, 48, 128);
+}
+.icon-qa .path1:before {
+  content: "\e904";
+  color: rgb(241, 116, 76);
+}
+.icon-qa .path2:before {
+  content: "\e905";
+  margin-left: -1.236328125em;
+  color: rgb(25, 48, 128);
+}
+.icon-ui-ux .path1:before {
+  content: "\e906";
+  color: rgb(241, 116, 76);
+}
+.icon-ui-ux .path2:before {
+  content: "\e907";
+  margin-left: -1em;
+  color: rgb(25, 48, 128);
+}
+.icon-web-design .path1:before {
+  content: "\e908";
+  color: rgb(241, 116, 76);
+}
+.icon-web-design .path2:before {
+  content: "\e909";
+  margin-left: -0.802734375em;
+  color: rgb(25, 48, 128);
+}
+.icon-web-development .path1:before {
+  content: "\e900";
+  color: rgb(241, 116, 76);
+}
+.icon-web-development .path2:before {
+  content: "\e901";
+  margin-left: -1em;
+  color: rgb(25, 48, 128);
+}
