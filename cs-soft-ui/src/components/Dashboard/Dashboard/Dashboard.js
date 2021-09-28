@@ -1,3 +1,12 @@
+import Budget from './dashboard_components/Budget';
+import { Box, Container, Grid } from '@material-ui/core';
+import LatestOrders from './dashboard_components/LatestOrders';
+import LatestProducts from './dashboard_components/LatestProducts';
+import Sales from './dashboard_components/Sales';
+import TasksProgress from './dashboard_components/TasksProgress';
+import TotalCustomers from './dashboard_components/TotalCustomers';
+import TotalProfit from './dashboard_components/TotalProfit';
+import TrafficByDevice from './dashboard_components/TrafficByDevice';
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -78,11 +87,15 @@ function Dashboard(props) {
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                    <ListItemText primary="Customers" />
+                    <ListItemText primary="Docs" />
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>{<DonutLargeOutlinedIcon />}</ListItemIcon>
-                    <ListItemText primary="Products" />
+                    <ListItemText primary="Projects" />
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>{<DonutLargeOutlinedIcon />}</ListItemIcon>
+                    <ListItemText primary="Notifications" />
                 </ListItem>
 
             </List>
@@ -110,20 +123,85 @@ function Dashboard(props) {
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        className={classes.menuButton}
+                <Container maxWidth={false}>
+                    <Grid
+                        container
+                        spacing={3}
                     >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Dashboard
-                    </Typography>
-                </Toolbar>
+                        <Grid
+                            item
+                            lg={3}
+                            sm={6}
+                            xl={3}
+                            xs={12}
+                        >
+                            <Budget />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={3}
+                            sm={6}
+                            xl={3}
+                            xs={12}
+                        >
+                            <TotalCustomers />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={3}
+                            sm={6}
+                            xl={3}
+                            xs={12}
+                        >
+                            <TasksProgress />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={3}
+                            sm={6}
+                            xl={3}
+                            xs={12}
+                        >
+                            <TotalProfit sx={{ height: '100%' }} />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={8}
+                            md={12}
+                            xl={9}
+                            xs={12}
+                        >
+                            <Sales />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={4}
+                            md={6}
+                            xl={3}
+                            xs={12}
+                        >
+                            <TrafficByDevice sx={{ height: '100%' }} />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={4}
+                            md={6}
+                            xl={3}
+                            xs={12}
+                        >
+                            <LatestProducts sx={{ height: '100%' }} />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={8}
+                            md={12}
+                            xl={9}
+                            xs={12}
+                        >
+                            <LatestOrders />
+                        </Grid>
+                    </Grid>
+                </Container>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -138,7 +216,7 @@ function Dashboard(props) {
                             paper: classes.drawerPaper,
                         }}
                         ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
+                            keepMounted: true, // Better open performance on mobile
                         }}
                     >
                         {drawer}
@@ -165,10 +243,6 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window: PropTypes.func,
 };
 
