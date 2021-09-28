@@ -50,7 +50,7 @@ function App() {
               <Route  path="/About" component={About}></Route>
               <Route  path="/Profile" component={Profile}></Route>
               <Route  path="/login" component={Login}></Route>
-              <Route  path="/d" component={Dashboard}></Route>
+              <Route  path="/" component={Dashboard}></Route>
               <Route  path="/register" component={Register}></Route>
               <Route path="/**" render={() => <Redirect to="/register" />}></Route>
         </Switch>

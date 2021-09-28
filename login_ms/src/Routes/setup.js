@@ -72,26 +72,6 @@ router.get("/", (req, res, next) => {
   res.send({ message: "hello ,wolcome to login serviece" })
 })
 //Get Permissions
-router.get('/getPermissions/:userId', function (req, res, next) {
-  let userId = req.params.userId;
-  userService.getPermission(userId).then(function (permissions) {
-    res.json(permissions);
-    res.status = 200;
-  }).catch(err => next(err));
-})
-//Post permissions
-router.post('/pushPermissions/:CS_U_Id', function (req, res, next) {
-  let CS_U_Id = req.params.CS_U_Id;
-  let access1 = req.body.access1;
-  let access2 = req.body.access2;
-  let access3 = req.body.access3;
-  let access4 = req.body.access4;
-  let access5 = req.body.access5
-  console.log(CS_U_Id, access1, access2, access3, access4, access5)
-  userService.pushPermission(CS_U_Id, access1, access2, access3, access4, access5).then(function (perm) {
-    res.json(perm);
-    res.status = 200;
-  }).catch(err => next(err));
-})
+
 
 module.exports = router;

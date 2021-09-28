@@ -86,9 +86,9 @@ userService.getPermission = (userId) => {
         }
     })
 }
-userService.pushPermission = (CS_U_Id, access1, access2, access3, access4, access5) => {
+userService.pushPermission = (accesses) => {
 
-    return auth_controller.pushPermission(CS_U_Id, access1, access2, access3, access4, access5).then((perm) => {
+    return auth_controller.pushPermission(accesses).then((perm) => {
         if (perm == null) {
             let err = new Error("Cant authorise !")
             err.status = 406
