@@ -104,11 +104,11 @@ function Register(props) {
             }
         }
         //console.log(obj);
-        axios.post(URL,obj).then(Responsedata=>{
-            console.log(Responsedata);
-        }).catch(err=>{
-            console.log("err"+err);
-        })
+        // axios.post(URL,obj).then(Responsedata=>{
+        //     console.log(Responsedata);
+        // }).catch(err=>{
+        //     console.log("err"+err);
+        // })
     }
     const validateField = (fieldName, value) => {
         var message;
@@ -186,7 +186,7 @@ function Register(props) {
 
     return (
         <div className="content">
-            <div className="container">
+            <div className="container register-container">
                 <div className="row">
                     <div className="col-md-6">
                         <img src="undraw_remotely_2j6y.svg" alt="Image" className="img-fluid" />
@@ -194,7 +194,7 @@ function Register(props) {
                     <div className="col-md-6 contents">
                         <div className="row justify-content-center">
                             <div className="col-md-8">
-                                <div className="mb-4">
+                                <div className="mb-4 text-center">
                                     <h3>Sign Up</h3>
                                     <p className="mb-4">Once a new technology rolls over you, if you're not part of the steamroller, you're part of the road.</p>
                                 </div>

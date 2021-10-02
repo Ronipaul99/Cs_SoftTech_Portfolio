@@ -1,0 +1,273 @@
+Error: User already Exist with this email
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:12:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+UnauthorizedError: Unauthorized
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:33:34
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:90:14)
+    at Object.module.exports [as verify] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:94:10)
+    at verifyAccessToken (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:30:13)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:174:3)
+    at router (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:317:13)
+Error: User already Exist with this email
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:12:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: User already Exist with this email
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:12:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: User already Exist with this email
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:12:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: User already Exist with this email
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:12:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+UnauthorizedError: Unauthorized
+    at verifyAccessToken (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:26:67)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:174:3)
+    at router (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:317:13)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at requestLogger (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\RequestLogger.js:8:5)
+UnauthorizedError: Unauthorized
+    at verifyAccessToken (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:26:67)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:174:3)
+    at router (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:317:13)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at requestLogger (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\RequestLogger.js:8:5)
+UnauthorizedError: Unauthorized
+    at verifyAccessToken (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:26:67)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:174:3)
+    at router (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:317:13)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at requestLogger (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\RequestLogger.js:8:5)
+UnauthorizedError: Unauthorized
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:33:34
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:90:14)
+    at Object.module.exports [as verify] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:94:10)
+    at verifyAccessToken (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:30:13)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:174:3)
+    at router (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:317:13)
+UnauthorizedError: Unauthorized
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:33:34
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:90:14)
+    at Object.module.exports [as verify] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:94:10)
+    at verifyAccessToken (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:30:13)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:174:3)
+    at router (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:317:13)
+UnauthorizedError: Unauthorized
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:33:34
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:90:14)
+    at Object.module.exports [as verify] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\jsonwebtoken\verify.js:94:10)
+    at verifyAccessToken (D:\git\Cs_SoftTech_Portfolio\login_ms\src\Utilities\jwt_helper.js:30:13)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:174:3)
+    at router (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\git\Cs_SoftTech_Portfolio\login_ms\node_modules\express\lib\router\index.js:317:13)
+Error: Can't find user with this email: undefined
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: undefined
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: undefined
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul19972@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaulg9972@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Account Deactivated
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:58:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:67:31
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:67:31
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:67:31
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:66:31
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:66:31
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:66:31
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:66:31
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Authentication failed wrong pasword
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:66:31
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul997s22@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul997s22@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul997s22@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul997s22@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul997s22@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Can't find user with this email: ronipaul99722@gmail.com
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:52:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Account Deactivated
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:58:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+Error: Account Deactivated
+    at D:\git\Cs_SoftTech_Portfolio\login_ms\src\services\UserService.js:58:23
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
