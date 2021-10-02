@@ -1,7 +1,8 @@
 require('dotenv').config()
 const nodemailer = require('nodemailer')
-const {google} = require('googleapis')
-const {signAccessToken2} = require('../Utilities/jwt_helper')
+const { google } = require('googleapis')
+const { signAccessToken2 } = require('../Utilities/jwt_helper')
+const connection = require('../Utilities/connection');
 const auth_controller = {}
 
 const oAuth2Client = new google.auth.OAuth2(
@@ -14,44 +15,44 @@ const oAuth2Client = new google.auth.OAuth2(
 )
 
 oAuth2Client.setCredentials({
-   // refresh_token: "1//042tD5BJXpJrYCgYIARAAGAQSNwF-L9Iras945LqN-d38X9SCPeBjYFBarFZRNQb8diJmdIp-cSVLw0sNyJXjRox-xjU7UfJ1mbg"
-   refresh_token: "1//04LLUPqHRgP6vCgYIARAAGAQSNwF-L9IrdSJ1xwY-p2V22bWos1tsd1LUvZfinRkTo8b0Xcuv1YKsZnSv4GOXHO-rJsCqp48LyMU"
+    // refresh_token: "1//042tD5BJXpJrYCgYIARAAGAQSNwF-L9Iras945LqN-d38X9SCPeBjYFBarFZRNQb8diJmdIp-cSVLw0sNyJXjRox-xjU7UfJ1mbg"
+    refresh_token: "1//04LLUPqHRgP6vCgYIARAAGAQSNwF-L9IrdSJ1xwY-p2V22bWos1tsd1LUvZfinRkTo8b0Xcuv1YKsZnSv4GOXHO-rJsCqp48LyMU"
 });
 
 //test@cssoftech.com
 //TestCS@123
-auth_controller.sendMail = async (user)=>{
+auth_controller.sendMail = async (user) => {
     //    const accessToken = await oAuth2Client.getAccessToken()
     const Emailtoken = await signAccessToken2(user.CS_U_Id)
-    const link = 'http://localhost:3000/verifyRegistration/'+Emailtoken+"/"+user.CS_U_Id
+    const link = 'http://localhost:3000/verifyRegistration/' + Emailtoken + "/" + user.CS_U_Id
 
-        // return oAuth2Client.getAccessToken().then(response=>{
-        //     const accessToken = response.token
-        //     console.log(accessToken);
-            const Transport = nodemailer.createTransport({
-                // service: 'gmail',
-                // auth: {  
-                //     type: "OAuth2",
-                //     user: "cssofttech.suport@gmail.com",
-                //     clientId: process.env.CLIENT_ID,
-                //     clientSecret: process.env.CLIENT_SECRET,
-                //     refreshToken: process.env.REFRESH_TOKEN,
-                //     accessToken: accessToken
-                // },
-                service: 'gmail',
-                auth: {
-                    user: process.env.EMAIL,
-                    pass: process.env.PASSWORD
-                }
-            })
-            
-            const mailOptions = {
-                from: '"Auth Admin" <cssofttech.suport@gmail.com>', // sender address
-                to: user.userCred.email, // list of receivers
-                subject: "Account Verification: NodeJS Auth ✔", // Subject line
-                generateTextFromHTML: true,
-                text: 'hello from gmail test mail ', // html body  
-                html: `<div style="text-align:center;">
+    // return oAuth2Client.getAccessToken().then(response=>{
+    //     const accessToken = response.token
+    //     console.log(accessToken);
+    const Transport = nodemailer.createTransport({
+        // service: 'gmail',
+        // auth: {  
+        //     type: "OAuth2",
+        //     user: "cssofttech.suport@gmail.com",
+        //     clientId: process.env.CLIENT_ID,
+        //     clientSecret: process.env.CLIENT_SECRET,
+        //     refreshToken: process.env.REFRESH_TOKEN,
+        //     accessToken: accessToken
+        // },
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+    })
+
+    const mailOptions = {
+        from: '"Auth Admin" <cssofttech.suport@gmail.com>', // sender address
+        to: user.userCred.email, // list of receivers
+        subject: "Account Verification: NodeJS Auth ✔", // Subject line
+        generateTextFromHTML: true,
+        text: 'hello from gmail test mail ', // html body  
+        html: `<div style="text-align:center;">
                         <h3>Hello ${user.userProfile.userName} Gretings from Gmail Auth Test.</h3>
                         <br/>
                         <p>Please click the below link to verify 
@@ -59,19 +60,57 @@ auth_controller.sendMail = async (user)=>{
                         </p>
                         <img src="https://www.getmailbird.com/wp-content/uploads/2020/12/Email-greetings.png" alt="Girl in a jacket" width="500" height="400">
                     </div>`
-            }
-    
-            return Transport.sendMail(mailOptions).then(result=>{
-                return result
-            }).catch(err=>{
-                console.log("mail err");
-                console.log(err);
-            })
-        // }).catch(err=>{
-        //     console.log("error1", err);
-        // })
-           // return result
-        
+    }
+
+    return Transport.sendMail(mailOptions).then(result => {
+        return result
+    }).catch(err => {
+        console.log("mail err");
+        console.log(err);
+    })
+    // }).catch(err=>{
+    //     console.log("error1", err);
+    // })
+    // return result
+
+}
+//Authorization process//
+
+auth_controller.getPermission = (userId) => {
+    return connection.getPermissionCollection().then((collection) => {
+        return collection.find({ "CS_U_Id": userId }, { _id: 0 }).then((permissions) => {
+            if (permissions != null)
+                return permissions;
+            else
+                return null;
+        })
+    })
+
 }
 
+
+auth_controller.pushPermission = (CS_U_Id, access1, access2, access3, access4, access5) => {
+    return connection.getUserCollection().then((userCollection) => {
+        return userCollection.findOneAndUpdate({ "CS_U_Id": CS_U_Id }).then((user) => {
+            return connection.getPermissionCollection().then((permsCollection) => {
+                if (user) {
+                    let permission = {
+                        "CS_U_Id": CS_U_Id,
+                        "access1": access1,
+                        "access2": access2,
+                        "access3": access3,
+                        "access4": access4,
+                        "access5": access5
+                    }
+                    return permsCollection.create(permission).then((data) => {
+                        if (data)
+                            return data;
+                        else
+                            return null;
+                    })
+                }
+            })
+        })
+    })
+}
 module.exports = auth_controller

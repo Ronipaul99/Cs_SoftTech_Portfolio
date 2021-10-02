@@ -6,45 +6,50 @@ const auth_controller = require('../Model/auth_controler')
 const userService = {}
 
 userService.Register = (user) => {
+
     return userDAO.getUserByEmail(user.userCred.email).then(userData=>{
         var password=""
         if(userData){
             let err = new Error("User already Exist with this email")
             err.status = 401
             throw err
-        }else {
-            return bcrypt.hash(user.userCred.password,10).then(data=>{
+        } else {
+            return bcrypt.hash(user.userCred.password, 10).then(data => {
                 password = data
-                user.userCred.password= password
-                user.activationStatus=0
-                return userDAO.createCSID().then(CsUid=>{
+                user.userCred.password = password
+                user.activationStatus = 0
+                return userDAO.createCSID().then(CsUid => {
                     user.CS_U_Id = CsUid
+
                     return userDAO.CreateUser(user).then(response=>{
                         if(!response){
                             let err = new Error("Failed to register the user : "+user.userProfile.userName)
+
                             err.status = 501
                             throw err
-                        }else{
-                            return auth_controller.sendMail(user).then(data=>{
+                        } else {
+                            return auth_controller.sendMail(user).then(data => {
                                 return data;
+
                             }).catch(err=>{
                                 throw err
                             })
                         }
-                    }).catch(err=>{
+                    }).catch(err => {
                         console.log(err);
                     })
-                }).catch(err=>{
+                }).catch(err => {
                     console.log(err);
                 })
-                
-            }).catch(err=>{
+
+            }).catch(err => {
                 console.log(err);
             })
-            
+
         }
     })
 }
+
 
 userService.login = (email , password) => {
     return userDAO.getUserByEmail(email).then(user=>{
@@ -68,8 +73,36 @@ userService.login = (email , password) => {
                     throw err
                 }
             })
-            
+
         }
+    })
+}
+userService.getPermission = (userId) => {
+    return auth_controller.getPermission(userId).then((perms) => {
+        if (perms == null) {
+            let err = new Error("Not authorised to any service !")
+            err.status = 406
+            throw err
+        }
+        else {
+            return perms;
+
+        }
+    })
+}
+userService.pushPermission = (accesses) => {
+
+    return auth_controller.pushPermission(accesses).then((perm) => {
+        if (perm == null) {
+            let err = new Error("Cant authorise !")
+            err.status = 406
+            throw err
+        }
+        else {
+            return perm;
+
+        }
+
     })
 }
 

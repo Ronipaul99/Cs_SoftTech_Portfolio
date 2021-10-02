@@ -4,6 +4,7 @@ import About from './components/About';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
+
 import Dashboard from './pages/Dashboard/index';
 import Footer from './components/Footer';
 import Service from "./pages/sarvice";
@@ -12,6 +13,7 @@ import './icon/style.css'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ServiceDetails from "./pages/sarvice/service-details";
+
 
 function App() {
   return (
@@ -164,7 +166,10 @@ function App() {
                    
                     
         <Switch>
-          <Route exact path="/" component={Home}></Route>
+
+          <Route exact path="/" component={Dashboard}></Route>
+          <Route exact path="/home" component={Home}></Route>
+
           <Route exact path="/About" component={About}></Route>
           <Route exact path="/Profile" component={Profile}></Route>
           <Route exact path="/login" component={Login}></Route>
