@@ -34,44 +34,42 @@ router.get('/verifyRegistration/:accessToken/:userId', (req, res, next) => {
     })
   })
 })
-router.post('/Register', (req, res) => {
-  const user = req.body
-  userService.Register(user).then(response => {
-    res.send(response)
-  }).catch(err => {
-    res.send(err.message)
-    // console.log(err);
-  })
+
+router.post('/Register',(req,res,next)=>{
+    const user = req.body
+    userService.Register(user).then(response=>{
+      res.send(response)
+    }).catch(err=>{
+      next(err)
+      // console.log(err);
+    })
 })
 
-router.post('/login', verifyAccessToken, (req, res, next) => {
-  const userEmail = req.body.Email
-  const password = req.body.password
-  userService.login(userEmail, password).then(user => {
-    res.send(user)
-  }).catch(err => {
-    console.log(err);
-  })
+router.post('/login',(req,res,next)=>{
+    const userEmail= req.body.Email
+    const password = req.body.password
+    userService.login(userEmail , password).then(user=>{
+      res.send(user)
+    }).catch(err=>{
+      next(err)
+    })
 
 })
 
-router.delete('/deleteUser/:id', (req, res) => {
-  const userId = req.params.id
-  userDAO.deleteUser(userId).then(response => {
-    if (response) {
-      res.send("delete successfully")
-    } else {
-      res.send("Can't delete user")
-    }
+router.delete('/deleteUser/:id',(req,res,next)=>{
+    const userId = req.params.id
+    userDAO.deleteUser(userId).then(response=>{
+      if(response){
+        res.send("delete successfully")
+      }else{
+        res.send("Can't delete user")
+      }
+        
+    }).catch(err=>{
+      next(err)
+    })
+})
 
-  }).catch(err => {
-    console.log(err);
-  })
-})
-router.get("/", (req, res, next) => {
-  res.send({ message: "hello ,wolcome to login serviece" })
-})
-//Get Permissions
 
 
 module.exports = router;
