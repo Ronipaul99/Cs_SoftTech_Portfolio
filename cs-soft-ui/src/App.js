@@ -6,6 +6,7 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard/Dashboard';
+import Invoice from './components/ShowDoc/Invoice'
 function App() {
 
   const footer = (
@@ -42,7 +43,7 @@ function App() {
         </nav>
        
         <Switch>
-          <Route exact path="/" component={Dashboard}></Route>
+          <Route exact path="/" component={Invoice}></Route>
           <Route exact path="/home" component={Home}></Route>
           <Route exact path="/About" component={About}></Route>
           <Route exact path="/Profile" component={Profile}></Route>
