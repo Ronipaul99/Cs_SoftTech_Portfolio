@@ -1,4 +1,4 @@
-import { CircularProgress , colors, Divider, FormControl, Icon, InputLabel, OutlinedInput} from '@material-ui/core';
+import { CircularProgress , colors, Divider, FilledInput, FormControl, Icon, Input, InputLabel, OutlinedInput} from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -45,7 +45,7 @@ export default function (props) {
     const classes = useStyles()
     const [spin , setSpin] = useState(false)
     const [open, setOpen] = useState(false);
-
+    const [milestone , setMilestone] = useState(["milestone-1"])
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -60,6 +60,14 @@ export default function (props) {
             setSpin(false)
         }, 10);
     },[])
+
+    const addMilestone = () => {
+         var Milestone = milestone
+         var newMilestone = parseInt(Milestone[Milestone.length-1].split('-')[1])+1
+         newMilestone = "milestone-"+newMilestone
+        setMilestone(milestone.concat(newMilestone))
+        //console.log(Milestone);
+    }
     return (
         <div>
             {spin ? 
@@ -183,7 +191,7 @@ export default function (props) {
                     <Dialog
                         // fullWidth={fullWidth}
                         fullWidth={true}
-                        maxWidth="Sm"
+                        maxWidth="sm"
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="max-width-dialog-title"
@@ -193,64 +201,73 @@ export default function (props) {
                                 <Card className={classes.root}>
                                     <CardContent>
                                         <form className={classes.root} noValidate autoComplete="off">
-                                            <FormControl fullWidth className={classes.margin} variant="outlined">
-                                                <InputLabel htmlFor="outlined-adornment-amount">Project Title</InputLabel>
-                                                <OutlinedInput
-                                                    id="outlined-adornment-amount"
-                                                    labelWidth={150}
+                                            <FormControl fullWidth className={classes.margin} >
+                                                <InputLabel htmlFor="title">Project Title</InputLabel>
+                                                <Input
+                                                    id="title"
+                                                    labelWidth={10}
                                                 />
                                             </FormControl>
-                                            <FormControl fullWidth className={classes.margin} variant="outlined">
+                                            <FormControl fullWidth className={classes.margin} >
                                                 <InputLabel htmlFor="outlined-adornment-amount">Client id</InputLabel>
-                                                <OutlinedInput
+                                                <Input
                                                     id="outlined-adornment-amount"
                                                     labelWidth={150}
                                                 />
                                             </FormControl>
                                             <div className="row">
                                                 <div className="col-6">
-                                                    <FormControl fullWidth className={classes.margin} variant="outlined">
+                                                    <FormControl fullWidth className={classes.margin} variant="Standard">
                                                         <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
-                                                        <OutlinedInput
+                                                        <Input
                                                             id="outlined-adornment-amount"
                                                             labelWidth={150}
                                                         />
                                                     </FormControl>
                                                 </div>
                                                 <div className="col-6">
-                                                    <FormControl fullWidth className={classes.margin} variant="outlined">
+                                                    <FormControl fullWidth className={classes.margin} variant="Standard">
                                                         <InputLabel htmlFor="outlined-adornment-amount">Developer Id</InputLabel>
-                                                        <OutlinedInput
+                                                        <Input
                                                             id="outlined-adornment-amount"
                                                             labelWidth={150}
                                                         />
                                                     </FormControl>
                                                 </div>
                                             </div>
-                                            <div>
-                                                    <FormControl fullWidth className={classes.margin} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Mile Stone Title</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-amount"
-                                                            labelWidth={150}
+                                            {milestone.map((milestoneName , index) => {
+                                                
+                                                return(
+                                                    <div key={index}>
+                                                        <FormControl fullWidth className={classes.margin} variant="filled">
+                                                            <InputLabel htmlFor={milestoneName}>Milestone{index+1} Title</InputLabel>
+                                                            <FilledInput
+                                                                id={milestoneName}
+                                                                name={milestoneName}
+                                                                labelWidth={150}
+                                                            />
+                                                        </FormControl>
+                                                        <TextField
+                                                            className={classes.margin}
+                                                            fullWidth
+                                                            id={milestoneName+"-desc"}
+                                                            name={milestoneName+"-desc"}
+                                                            label={"Milestone"+(index+1)+" Description"}
+                                                            multiline
+                                                            rows={2}
+                                                            variant="filled"
                                                         />
-                                                    </FormControl>
-                                                    <TextField
-                                                        className={classes.margin}
-                                                        fullWidth
-                                                        id="outlined-multiline-static"
-                                                        label="Description"
-                                                        multiline
-                                                        rows={2}
-                                                        variant="outlined"
-                                                    />
-                                                </div>
+                                                    </div>
+                                                )
+                                            })}
+                                            
                                                 <div className="text-center">
                                                     <Button
                                                         variant="contained"
                                                         color="secondary"
                                                         className={classes.margin}
                                                         startIcon={<AddIcon />}
+                                                        onClick={addMilestone}
                                                     >
                                                         Add Milestone
                                                     </Button>
