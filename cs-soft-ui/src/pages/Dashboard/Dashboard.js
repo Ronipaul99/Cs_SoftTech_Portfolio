@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 //
-import Dashboard_Home from '.'
+import Dashboard_Home from './dashboard_components'
 import Project from '../Projects'
 import Docs from '../Docket'
 import Task from '../Task'
@@ -101,7 +101,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [page , setpage] = useState('Projects')
+  const [page , setpage] = useState('Dashboard')
   const handleDrawerOpen = () => {
     setOpen(true);
   };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Grid } from '@material-ui/core';
 import TasksProgress from './TasksProgress';
 import TotalCustomers from './TotalCustomers';
-import Budget from '../Budget';
+import Budget from './Budget';
 import TotalProfit from './TotalProfit';
 import Sales from './Sales';
 import TrafficByDevice from './TrafficByDevice';
@@ -10,7 +10,7 @@ import LatestProducts from './LatestProducts';
 import LatestOrders from './LatestOrders';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-export default function(props) {
+export default function (props) {
     const [spin , setSpin] = useState(false)
     useEffect(()=>{
         setSpin(true)

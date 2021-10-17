@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme)=>({
 export default function (props) {
     const classes = useStyles()
     const [spin , setSpin] = useState(false)
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
       setOpen(true);
