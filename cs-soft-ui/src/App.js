@@ -5,7 +5,7 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
 
-import Dashboard from './pages/Dashboard/index';
+import Dashboard from './pages/Dashboard/Dashboard';
 import Footer from './components/Footer';
 import Service from "./pages/sarvice";
 import './css/app.css'
