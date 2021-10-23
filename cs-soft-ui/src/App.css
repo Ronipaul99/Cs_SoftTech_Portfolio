@@ -33,7 +33,11 @@ h2 {
 @media (max-width: 991.98px) {
   .content .bg {
     height: 500px; } }
-
+.folderControl{
+  position: relative;
+  top:10px;
+  size: 20px;
+}
 .content .contents, .content .bg {
   width: 50%; }
   @media (max-width: 1199.98px) {

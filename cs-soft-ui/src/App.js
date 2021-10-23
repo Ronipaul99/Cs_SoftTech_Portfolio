@@ -13,7 +13,7 @@ import './icon/style.css'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ServiceDetails from "./pages/sarvice/service-details";
-
+import ShowDocs from "./pages/Docket/ShowDocs"
 
 function App() {
   return (
@@ -176,6 +176,8 @@ function App() {
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/Services" component={Service}></Route>
           <Route exact path="/inner-services" component={ServiceDetails}></Route>
+          <Route exact path="/showDocs" component={ShowDocs}></Route>
+          
           <Route path="/**" render={() => <Redirect to="/register" />}></Route>
         </Switch>
       </Router>
