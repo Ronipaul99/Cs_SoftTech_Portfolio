@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import axios from 'axios';
 //
 import FolderOpen from '@material-ui/icons/FolderOpen';
 import ShowDocs from "./ShowDocs"
@@ -14,11 +15,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Docket() {
     const [docs, setDocs] = React.useState(false);
+    const [invoices, setInvoices]=React.useState([])
+
+    useEffect(() => {
+        // GET request using axios inside useEffect React hook to fetch the Invoice data and set it to invoices hook
+        axios.get('http://localhost:3000/getDocsById/U1001').then((response)=>{
+            setInvoices(response.data);
+            
+        });
+    
+    }, []);
     const fetchInvoices = () => {
         setDocs(true)
         console.log("Fetching Invoices...", docs);
+        console.log(invoices);
 
     }
+    
     const fetchDocs = () => {
         // setDocs(true)
         console.log("Fetching Docs...", docs)
@@ -28,8 +41,8 @@ export default function Docket() {
 
         <div>
             {docs ?
-                <div className="text-center" style={{ maxWidth: '180px', maxHeight: '180px', minWidth: '180px', minHeight: '180px'}} >
-                    <ShowDocs setDocs={setDocs}></ShowDocs>
+                <div className="text-center" >
+                    <ShowDocs setDocs={setDocs} invoices={invoices}></ShowDocs>
                 </div >
                 :
                 <div>

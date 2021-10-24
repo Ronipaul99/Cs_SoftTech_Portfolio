@@ -3,8 +3,10 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const homeRoutes = require('./routes/home-routes');
 const bodyParser = require('body-parser');
+var cors = require('cors')
 // const cors = require("cors")
 const app = express();
+app.use(cors())
 // app.use(cors())
 app.use(bodyParser.json());
 
