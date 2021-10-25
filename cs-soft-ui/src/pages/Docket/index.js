@@ -1,5 +1,6 @@
 import { CircularProgress } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import Docket from './Docket';
 export default function (props) {
     const [spin , setSpin] = useState(false)
     useEffect(()=>{
@@ -15,8 +16,8 @@ export default function (props) {
                     <CircularProgress style={{ marginTop:"15%" , marginLeft:"48%" , alignItems:"center" }}/>
                 </div>
                 :
-                <div className="text-center" style={{height:"400px" , alignContent:"center"}}>
-                    Docket
+                <div className="text-center" style={{height:"400px" , alignContent:"left"}}>
+                    <Docket></Docket>
                 </div>
             }
         </div>
