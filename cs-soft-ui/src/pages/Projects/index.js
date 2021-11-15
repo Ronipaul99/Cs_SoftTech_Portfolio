@@ -21,6 +21,15 @@ import BeenhereIcon from '@material-ui/icons/Beenhere';
 import BookIcon from '@material-ui/icons/Book';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import LatestOrders from '../Dashboard/dashboard_components/LatestOrders';
+
+
+import clsx from 'clsx';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 const useStyles = makeStyles((theme)=>({
     root: {
       minWidth: 275,
@@ -39,17 +48,80 @@ const useStyles = makeStyles((theme)=>({
     pos: {
       marginBottom: 12,
     },
+    delete:{
+        marginLeft:"65%",
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+          duration: theme.transitions.duration.shortest,
+        }),
+      },
+      expandOpen: {
+        transform: 'rotate(180deg)',
+      },
   }));
   
 export default function (props) {
     const classes = useStyles()
     const [spin , setSpin] = useState(false)
     const [open, setOpen] = useState(false);
-    const [milestone , setMilestone] = useState(["milestone-1"])
+    const [milestone , setMilestone] = useState([{id:"milestone-1",name:"",description:""}])
+    const [expanded, setExpanded] = useState(0);
+    const [project , setProject] = useState({
+        title:'',
+        clientId:'',
+        totalValue:0,
+        DeveloperId:'',
+    })
+    const [error , setError] = useState({
+        titleErr:'',
+        clientIdErr:'',
+        totalValueErr:'',
+        DeveloperIdErr:''
+    })
+
+    const handelChange = (e) => {
+        var name = e.target.name
+        var value = e.target.value
+        if (name==="milestone") {
+            
+        }
+        setProject({...project,[name]:value})
+        validate(name,value)
+    }
+
+    const validate = (name,value) => {
+        switch (name) {
+            case "title":
+                
+                break;
+            case "clientId":
+                
+                break;
+            case "totalValue":
+                
+                break;
+            case "DeveloperIdErr":
+                
+                break;
+            default:
+                break;
+        }
+    }
     const handleClickOpen = () => {
       setOpen(true);
     };
-  
+    
+    const handleExpandClick = (value) => {
+        if(value!==expanded){
+            setExpanded(value);
+        }else{
+            setExpanded(0)
+        }
+      };
+    
     const handleClose = () => {
       setOpen(false);
     };
@@ -60,14 +132,36 @@ export default function (props) {
             setSpin(false)
         }, 10);
     },[])
-
+    const editMilestone = (e,index) => {
+        var name = e.target.name
+        var value = e.target.value
+        var mStone = milestone
+        for (let i = 0; i < milestone.length; i++) {
+            if(i===index){
+                mStone[i][name]=value
+            }
+        }
+        setMilestone(mStone)
+        console.log(milestone);
+    }
     const addMilestone = () => {
          var Milestone = milestone
-         var newMilestone = parseInt(Milestone[Milestone.length-1].split('-')[1])+1
-         newMilestone = "milestone-"+newMilestone
+         var newMilestone = parseInt(Milestone[Milestone.length-1].id.split('-')[1])+1
+         newMilestone = {id:"milestone-"+newMilestone,name:"",description:""}
         setMilestone(milestone.concat(newMilestone))
         //console.log(Milestone);
     }
+
+    const deleteMileStone = (index) => {
+        var Milestone = milestone
+        var new_array = []
+        for (let i = 0; i < Milestone.length; i++) {
+           if(i!==index){
+               new_array.push(Milestone[i])
+           }
+        }
+        setMilestone(new_array)
+    } 
     return (
         <div>
             {spin ? 
@@ -201,62 +295,108 @@ export default function (props) {
                                 <Card className={classes.root}>
                                     <CardContent>
                                         <form className={classes.root} noValidate autoComplete="off">
-                                            <FormControl fullWidth className={classes.margin} >
-                                                <InputLabel htmlFor="title">Project Title</InputLabel>
-                                                <Input
-                                                    id="title"
-                                                    labelWidth={10}
+                                            <div class="form-group">
+                                                <label for="title">Project Title</label>
+                                                <input type="text" 
+                                                    class="form-control" 
+                                                    name="title" 
+                                                    id="title" 
+                                                    placeholder="e:g Example"
+                                                    onChange={handelChange}
                                                 />
-                                            </FormControl>
-                                            <FormControl fullWidth className={classes.margin} >
-                                                <InputLabel htmlFor="outlined-adornment-amount">Client id</InputLabel>
-                                                <Input
-                                                    id="outlined-adornment-amount"
-                                                    labelWidth={150}
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="clientId">Client id</label>
+                                                <input type="text" 
+                                                    class="form-control" 
+                                                    id="clientId" 
+                                                    name="clientId" 
+                                                    placeholder="e:g Example"
+                                                    onChange={handelChange}
                                                 />
-                                            </FormControl>
+                                            </div>
                                             <div className="row">
                                                 <div className="col-6">
-                                                    <FormControl fullWidth className={classes.margin} variant="Standard">
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
-                                                        <Input
-                                                            id="outlined-adornment-amount"
-                                                            labelWidth={150}
+                                                    <div class="form-group">
+                                                        <label for="totalValue">Total value</label>
+                                                        <input 
+                                                            type="text" 
+                                                            class="form-control"
+                                                            id="totalValue" 
+                                                            name="totalValue" 
+                                                            placeholder="e:g Example"
+                                                            onChange={handelChange}
                                                         />
-                                                    </FormControl>
+                                                    </div>
                                                 </div>
                                                 <div className="col-6">
-                                                    <FormControl fullWidth className={classes.margin} variant="Standard">
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Developer Id</InputLabel>
-                                                        <Input
-                                                            id="outlined-adornment-amount"
-                                                            labelWidth={150}
+                                                    <div class="form-group">
+                                                        <label for="DeveloperId">Developer Id</label>
+                                                        <input type="text" 
+                                                            class="form-control" 
+                                                            id="DeveloperId" 
+                                                            name="DeveloperId" 
+                                                            placeholder="e:g Example"
+                                                            onChange={handelChange}
                                                         />
-                                                    </FormControl>
+                                                    </div>
                                                 </div>
                                             </div>
                                             {milestone.map((milestoneName , index) => {
                                                 
                                                 return(
-                                                    <div key={index}>
-                                                        <FormControl fullWidth className={classes.margin} variant="filled">
-                                                            <InputLabel htmlFor={milestoneName}>Milestone{index+1} Title</InputLabel>
-                                                            <FilledInput
-                                                                id={milestoneName}
-                                                                name={milestoneName}
-                                                                labelWidth={150}
-                                                            />
-                                                        </FormControl>
-                                                        <TextField
-                                                            className={classes.margin}
-                                                            fullWidth
-                                                            id={milestoneName+"-desc"}
-                                                            name={milestoneName+"-desc"}
-                                                            label={"Milestone"+(index+1)+" Description"}
-                                                            multiline
-                                                            rows={2}
-                                                            variant="filled"
-                                                        />
+                                                    <div key={index} style={{marginBottom:"2%"}}>
+                                                        <Card className={classes.root}>
+                                                            <CardActions disableSpacing>
+                                                                <Typography>
+                                                                    {"Milestone"+(index+1)}
+                                                                </Typography>
+                                                                {index!==0 && <IconButton 
+                                                                    className={classes.delete}
+                                                                    onClick={_=>{deleteMileStone(index)}}
+                                                                >
+                                                                    <DeleteOutlineIcon/>
+                                                                </IconButton>}
+                                                                <IconButton
+                                                                    className={clsx(classes.expand, {
+                                                                        [classes.expandOpen]: (index+1)===expanded ? true : false,
+                                                                    })}
+                                                                    onClick={()=>{handleExpandClick(index+1)}}
+                                                                    aria-expanded={(index+1)===expanded ? true : false}
+                                                                    aria-label="show more"
+                                                                >
+                                                                    <ExpandMoreIcon />
+                                                                </IconButton>
+                                                                
+
+                                                            </CardActions>
+                                                            <Collapse in={(index+1)===expanded ? true : false} timeout="auto" unmountOnExit >
+                                                                    <div style={{marginInline:"2%"}}>
+                                                                        <div class="form-group">
+                                                                            {/* <label for="exampleFormControlInput1">Milestone{index+1} Title</label> */}
+                                                                            <input type="text" 
+                                                                                class="form-control" 
+                                                                                name="name" 
+                                                                                id="name" 
+                                                                                placeholder={`Milestone${index+1} Title`}
+                                                                                onChange={e=>{editMilestone(e,index)}}
+                                                                            />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            {/* <label for="exampleFormControlTextarea1">{"Milestone"+(index+1)+" Description"}</label> */}
+                                                                            <textarea 
+                                                                                class="form-control" 
+                                                                                name="description" 
+                                                                                id="description" 
+                                                                                rows="3" 
+                                                                                placeholder={`Milestone"${index+1}" Description`}
+                                                                                onChange={e=>{editMilestone(e,index)}}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                            </Collapse>
+                                                        </Card>
+                                                        
                                                     </div>
                                                 )
                                             })}
