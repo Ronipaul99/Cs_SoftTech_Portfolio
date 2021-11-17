@@ -1,5 +1,5 @@
 const express = require('express');
-const { createDoc,getDoc } = require('../controllers/homeController');
+const { createDoc,getDoc,uploadDoc } = require('../controllers/homeController');
 
 const router = express.Router();
 
@@ -47,7 +47,11 @@ router.post('/upload', (req, res) => {
         console.error(err);
         return res.status(500).send(err);
       }
-  
+      console.log(file.name);
+      var fileData={
+        doc_name:file.name
+      }
+      uploadDoc(fileData)
       res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
     });
   });

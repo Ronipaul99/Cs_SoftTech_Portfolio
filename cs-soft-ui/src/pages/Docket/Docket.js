@@ -46,6 +46,9 @@ export default function Docket() {
         setDocs(true)
         console.log("Upload your docs...");
     }
+    const back = () => {
+        setDocs(false)
+    }
     return (
 
         <div>
@@ -56,9 +59,17 @@ export default function Docket() {
                         <ShowDocs setDocs={setDocs} invoices={invoices}></ShowDocs>
                     </div >
                     :
-                    <div className="text-center">
-                        <App setDocs={setDocs}></App>
-                    </div>
+                    task == 3 ?
+                        <div className="text-center">
+                            <App setDocs={setDocs}></App>
+                        </div>
+                        :
+                        <div className="text-center">
+                            <ArrowBackIcon style={{
+                                display: "flex",
+                                alignItems: "left"
+                            }} onClick={back} /><br />
+                            Working in progress</div>
                 :
                 <div>
 
