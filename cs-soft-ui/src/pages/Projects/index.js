@@ -76,10 +76,11 @@ export default function (props) {
         DeveloperId:'',
     })
     const [error , setError] = useState({
-        titleErr:'',
-        clientIdErr:'',
-        totalValueErr:'',
-        DeveloperIdErr:''
+        title:'',
+        clientId:'',
+        totalValue:'',
+        DeveloperId:'',
+        milestone:[]
     })
 
     const handelChange = (e) => {
@@ -93,22 +94,43 @@ export default function (props) {
     }
 
     const validate = (name,value) => {
+        var message= ''
         switch (name) {
             case "title":
-                
+                var regex = new RegExp(/^[a-zA-Z]+(\s[a-zA-Z]+)?$/)
+                value === "" ? message = "Please enter your Title" : regex.test(value) ? message = "" : message = "Title id format is wrong";
                 break;
             case "clientId":
-                
+                var regex1 = new RegExp(/^[A-Z]/)
+                var regex2 = new RegExp(/^[0-9]/)
+                value === "" ? message = "Please enter clientId" :  message = "" 
+                regex1.test(value.slice(0,4))&& value[4]==='c' && regex2.test(value.slice(5,12)) ? message = "" : message = "clientId id format is wrong"
                 break;
             case "totalValue":
-                
+
+                value <= 0 ? message = "TotalValue should be grater than 0 " : message = ""
                 break;
-            case "DeveloperIdErr":
-                
+            case "DeveloperId":
+                var regex1 = new RegExp(/^[A-Z]/)
+                var regex2 = new RegExp(/^[0-9]/)
+                value === "" ? message = "Please enter DeveloperId" :  message = "" 
+                regex1.test(value.slice(0,4))&& value[4]==='d' && regex2.test(value.slice(5,12)) ? message = "" : message = "DeveloperId id format is wrong"
                 break;
             default:
                 break;
         }
+        setError({...error,[name]:message})
+    }
+
+    const handelSubmit = () => {
+        var milestoneErr = []
+       for (let index = 0; index < milestone.length; index++) {
+           if(milestone[index].name === "" || milestone[index].description === ""){
+               milestoneErr.push(index)
+           }
+       }
+        setError({...error,milestone:milestoneErr})
+
     }
     const handleClickOpen = () => {
       setOpen(true);
@@ -142,7 +164,6 @@ export default function (props) {
             }
         }
         setMilestone(mStone)
-        console.log(milestone);
     }
     const addMilestone = () => {
          var Milestone = milestone
@@ -295,50 +316,54 @@ export default function (props) {
                                 <Card className={classes.root}>
                                     <CardContent>
                                         <form className={classes.root} noValidate autoComplete="off">
-                                            <div class="form-group">
+                                            <div className="form-group">
                                                 <label for="title">Project Title</label>
                                                 <input type="text" 
-                                                    class="form-control" 
+                                                    className="form-control" 
                                                     name="title" 
                                                     id="title" 
                                                     placeholder="e:g Example"
                                                     onChange={handelChange}
                                                 />
+                                                <span className="text-danger"><small>{error.title!==""&&error.title}</small></span>
                                             </div>
-                                            <div class="form-group">
+                                            <div className="form-group">
                                                 <label for="clientId">Client id</label>
                                                 <input type="text" 
-                                                    class="form-control" 
+                                                    className="form-control" 
                                                     id="clientId" 
                                                     name="clientId" 
                                                     placeholder="e:g Example"
                                                     onChange={handelChange}
                                                 />
+                                                <span className="text-danger"><small>{error.clientId!==""&&error.clientId}</small></span>
                                             </div>
                                             <div className="row">
                                                 <div className="col-6">
-                                                    <div class="form-group">
+                                                    <div className="form-group">
                                                         <label for="totalValue">Total value</label>
                                                         <input 
-                                                            type="text" 
-                                                            class="form-control"
+                                                            type="number" 
+                                                            className="form-control"
                                                             id="totalValue" 
                                                             name="totalValue" 
                                                             placeholder="e:g Example"
                                                             onChange={handelChange}
                                                         />
+                                                        <span className="text-danger"><small>{error.totalValue!==""&&error.totalValue}</small></span>
                                                     </div>
                                                 </div>
                                                 <div className="col-6">
-                                                    <div class="form-group">
+                                                    <div className="form-group">
                                                         <label for="DeveloperId">Developer Id</label>
                                                         <input type="text" 
-                                                            class="form-control" 
+                                                            className="form-control" 
                                                             id="DeveloperId" 
                                                             name="DeveloperId" 
                                                             placeholder="e:g Example"
                                                             onChange={handelChange}
                                                         />
+                                                        <span className="text-danger"><small>{error.DeveloperId!=="" && error.DeveloperId}</small></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -347,56 +372,58 @@ export default function (props) {
                                                 return(
                                                     <div key={index} style={{marginBottom:"2%"}}>
                                                         <Card className={classes.root}>
+                                                            
                                                             <CardActions disableSpacing>
-                                                                <Typography>
-                                                                    {"Milestone"+(index+1)}
-                                                                </Typography>
-                                                                {index!==0 && <IconButton 
-                                                                    className={classes.delete}
-                                                                    onClick={_=>{deleteMileStone(index)}}
-                                                                >
-                                                                    <DeleteOutlineIcon/>
-                                                                </IconButton>}
-                                                                <IconButton
-                                                                    className={clsx(classes.expand, {
-                                                                        [classes.expandOpen]: (index+1)===expanded ? true : false,
-                                                                    })}
-                                                                    onClick={()=>{handleExpandClick(index+1)}}
-                                                                    aria-expanded={(index+1)===expanded ? true : false}
-                                                                    aria-label="show more"
-                                                                >
-                                                                    <ExpandMoreIcon />
-                                                                </IconButton>
+                                                                    
+                                                                    <Typography>
+                                                                        {"Milestone"+(index+1)}
+                                                                    </Typography>
                                                                 
-
+                                                                    {index!==0 && <IconButton 
+                                                                        className={classes.delete}
+                                                                        onClick={_=>{deleteMileStone(index)}}
+                                                                    >
+                                                                        <DeleteOutlineIcon/>
+                                                                    </IconButton>}
+                                                                    <IconButton
+                                                                        className={clsx(classes.expand, {
+                                                                            [classes.expandOpen]: (index+1)===expanded ? true : false,
+                                                                        })}
+                                                                        onClick={()=>{handleExpandClick(index+1)}}
+                                                                        aria-expanded={(index+1)===expanded ? true : false}
+                                                                        aria-label="show more"
+                                                                    >
+                                                                        <ExpandMoreIcon />
+                                                                    </IconButton>
                                                             </CardActions>
                                                             <Collapse in={(index+1)===expanded ? true : false} timeout="auto" unmountOnExit >
+                                                            
                                                                     <div style={{marginInline:"2%"}}>
-                                                                        <div class="form-group">
+                                                                        <div className="form-group">
                                                                             {/* <label for="exampleFormControlInput1">Milestone{index+1} Title</label> */}
                                                                             <input type="text" 
-                                                                                class="form-control" 
+                                                                                className="form-control" 
                                                                                 name="name" 
                                                                                 id="name" 
-                                                                                placeholder={`Milestone${index+1} Title`}
+                                                                                placeholder={`Milestone ${index+1} Title`}
                                                                                 onChange={e=>{editMilestone(e,index)}}
                                                                             />
                                                                         </div>
-                                                                        <div class="form-group">
+                                                                        <div className="form-group">
                                                                             {/* <label for="exampleFormControlTextarea1">{"Milestone"+(index+1)+" Description"}</label> */}
                                                                             <textarea 
-                                                                                class="form-control" 
+                                                                                className="form-control" 
                                                                                 name="description" 
                                                                                 id="description" 
                                                                                 rows="3" 
-                                                                                placeholder={`Milestone"${index+1}" Description`}
+                                                                                placeholder={`Milestone ${index+1}Description`}
                                                                                 onChange={e=>{editMilestone(e,index)}}
                                                                             />
                                                                         </div>
                                                                     </div>
                                                             </Collapse>
                                                         </Card>
-                                                        
+                                                        <span className="text-danger"><small>{error.milestone.includes(index)&&"Please Enter Milestone Details"}</small></span>
                                                     </div>
                                                 )
                                             })}
@@ -416,6 +443,8 @@ export default function (props) {
                                                         color="primary"
                                                         className={classes.margin}
                                                         startIcon={<AddIcon />}
+                                                        onClick= {handelSubmit}
+                                                        disabled = {error.title==="" && error.clientId==="" && error.totalValue==="" && error.DeveloperId==="" ? false : true}
                                                     >
                                                         create
                                                     </Button>
