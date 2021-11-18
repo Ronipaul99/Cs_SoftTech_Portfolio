@@ -1,5 +1,5 @@
 const express = require('express');
-const { createDoc,getDoc } = require('../controllers/homeController');
+const { createDoc,getDoc,uploadDoc } = require('../controllers/homeController');
 
 const router = express.Router();
 
@@ -35,4 +35,24 @@ router.get('/getDocsById/:userId',(req,res)=>{
     })
     
 })
+router.post('/upload', (req, res) => {
+    if (req.files === null) {
+      return res.status(400).json({ msg: 'No file uploaded' });
+    }
+  
+    const file = req.files.file;
+  
+    file.mv(`${__dirname}/uploadDocs/${file.name}`, err => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
+      console.log(file.name);
+      var fileData={
+        doc_name:file.name
+      }
+      uploadDoc(fileData)
+      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    });
+  });
 module.exports = router;
