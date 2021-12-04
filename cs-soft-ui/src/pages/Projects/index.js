@@ -1,4 +1,4 @@
-import { CircularProgress , colors, Divider, FormControl, Icon, InputLabel, OutlinedInput} from '@material-ui/core';
+import { CircularProgress , colors, Divider, FilledInput, FormControl, Icon, Input, InputLabel, OutlinedInput} from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -21,6 +21,15 @@ import BeenhereIcon from '@material-ui/icons/Beenhere';
 import BookIcon from '@material-ui/icons/Book';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import LatestOrders from '../Dashboard/dashboard_components/LatestOrders';
+
+
+import clsx from 'clsx';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 const useStyles = makeStyles((theme)=>({
     root: {
       minWidth: 275,
@@ -39,17 +48,102 @@ const useStyles = makeStyles((theme)=>({
     pos: {
       marginBottom: 12,
     },
+    delete:{
+        marginLeft:"65%",
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+          duration: theme.transitions.duration.shortest,
+        }),
+      },
+      expandOpen: {
+        transform: 'rotate(180deg)',
+      },
   }));
   
 export default function (props) {
     const classes = useStyles()
     const [spin , setSpin] = useState(false)
     const [open, setOpen] = useState(false);
+    const [milestone , setMilestone] = useState([{id:"milestone-1",name:"",description:""}])
+    const [expanded, setExpanded] = useState(0);
+    const [project , setProject] = useState({
+        title:'',
+        clientId:'',
+        totalValue:0,
+        DeveloperId:'',
+    })
+    const [error , setError] = useState({
+        title:'',
+        clientId:'',
+        totalValue:'',
+        DeveloperId:'',
+        milestone:[]
+    })
 
+    const handelChange = (e) => {
+        var name = e.target.name
+        var value = e.target.value
+        if (name==="milestone") {
+            
+        }
+        setProject({...project,[name]:value})
+        validate(name,value)
+    }
+
+    const validate = (name,value) => {
+        var message= ''
+        switch (name) {
+            case "title":
+                var regex = new RegExp(/^[a-zA-Z]+(\s[a-zA-Z]+)?$/)
+                value === "" ? message = "Please enter your Title" : regex.test(value) ? message = "" : message = "Title id format is wrong";
+                break;
+            case "clientId":
+                var regex1 = new RegExp(/^[A-Z]/)
+                var regex2 = new RegExp(/^[0-9]/)
+                value === "" ? message = "Please enter clientId" :  message = "" 
+                regex1.test(value.slice(0,4))&& value[4]==='c' && regex2.test(value.slice(5,12)) ? message = "" : message = "clientId id format is wrong"
+                break;
+            case "totalValue":
+
+                value <= 0 ? message = "TotalValue should be grater than 0 " : message = ""
+                break;
+            case "DeveloperId":
+                var regex1 = new RegExp(/^[A-Z]/)
+                var regex2 = new RegExp(/^[0-9]/)
+                value === "" ? message = "Please enter DeveloperId" :  message = "" 
+                regex1.test(value.slice(0,4))&& value[4]==='d' && regex2.test(value.slice(5,12)) ? message = "" : message = "DeveloperId id format is wrong"
+                break;
+            default:
+                break;
+        }
+        setError({...error,[name]:message})
+    }
+
+    const handelSubmit = () => {
+        var milestoneErr = []
+       for (let index = 0; index < milestone.length; index++) {
+           if(milestone[index].name === "" || milestone[index].description === ""){
+               milestoneErr.push(index)
+           }
+       }
+        setError({...error,milestone:milestoneErr})
+
+    }
     const handleClickOpen = () => {
       setOpen(true);
     };
-  
+    
+    const handleExpandClick = (value) => {
+        if(value!==expanded){
+            setExpanded(value);
+        }else{
+            setExpanded(0)
+        }
+      };
+    
     const handleClose = () => {
       setOpen(false);
     };
@@ -60,6 +154,35 @@ export default function (props) {
             setSpin(false)
         }, 10);
     },[])
+    const editMilestone = (e,index) => {
+        var name = e.target.name
+        var value = e.target.value
+        var mStone = milestone
+        for (let i = 0; i < milestone.length; i++) {
+            if(i===index){
+                mStone[i][name]=value
+            }
+        }
+        setMilestone(mStone)
+    }
+    const addMilestone = () => {
+         var Milestone = milestone
+         var newMilestone = parseInt(Milestone[Milestone.length-1].id.split('-')[1])+1
+         newMilestone = {id:"milestone-"+newMilestone,name:"",description:""}
+        setMilestone(milestone.concat(newMilestone))
+        //console.log(Milestone);
+    }
+
+    const deleteMileStone = (index) => {
+        var Milestone = milestone
+        var new_array = []
+        for (let i = 0; i < Milestone.length; i++) {
+           if(i!==index){
+               new_array.push(Milestone[i])
+           }
+        }
+        setMilestone(new_array)
+    } 
     return (
         <div>
             {spin ? 
@@ -183,7 +306,7 @@ export default function (props) {
                     <Dialog
                         // fullWidth={fullWidth}
                         fullWidth={true}
-                        maxWidth="Sm"
+                        maxWidth="sm"
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="max-width-dialog-title"
@@ -193,64 +316,125 @@ export default function (props) {
                                 <Card className={classes.root}>
                                     <CardContent>
                                         <form className={classes.root} noValidate autoComplete="off">
-                                            <FormControl fullWidth className={classes.margin} variant="outlined">
-                                                <InputLabel htmlFor="outlined-adornment-amount">Project Title</InputLabel>
-                                                <OutlinedInput
-                                                    id="outlined-adornment-amount"
-                                                    labelWidth={150}
+                                            <div className="form-group">
+                                                <label for="title">Project Title</label>
+                                                <input type="text" 
+                                                    className="form-control" 
+                                                    name="title" 
+                                                    id="title" 
+                                                    placeholder="e:g Example"
+                                                    onChange={handelChange}
                                                 />
-                                            </FormControl>
-                                            <FormControl fullWidth className={classes.margin} variant="outlined">
-                                                <InputLabel htmlFor="outlined-adornment-amount">Client id</InputLabel>
-                                                <OutlinedInput
-                                                    id="outlined-adornment-amount"
-                                                    labelWidth={150}
+                                                <span className="text-danger"><small>{error.title!==""&&error.title}</small></span>
+                                            </div>
+                                            <div className="form-group">
+                                                <label for="clientId">Client id</label>
+                                                <input type="text" 
+                                                    className="form-control" 
+                                                    id="clientId" 
+                                                    name="clientId" 
+                                                    placeholder="e:g Example"
+                                                    onChange={handelChange}
                                                 />
-                                            </FormControl>
+                                                <span className="text-danger"><small>{error.clientId!==""&&error.clientId}</small></span>
+                                            </div>
                                             <div className="row">
                                                 <div className="col-6">
-                                                    <FormControl fullWidth className={classes.margin} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-amount"
-                                                            labelWidth={150}
+                                                    <div className="form-group">
+                                                        <label for="totalValue">Total value</label>
+                                                        <input 
+                                                            type="number" 
+                                                            className="form-control"
+                                                            id="totalValue" 
+                                                            name="totalValue" 
+                                                            placeholder="e:g Example"
+                                                            onChange={handelChange}
                                                         />
-                                                    </FormControl>
+                                                        <span className="text-danger"><small>{error.totalValue!==""&&error.totalValue}</small></span>
+                                                    </div>
                                                 </div>
                                                 <div className="col-6">
-                                                    <FormControl fullWidth className={classes.margin} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Developer Id</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-amount"
-                                                            labelWidth={150}
+                                                    <div className="form-group">
+                                                        <label for="DeveloperId">Developer Id</label>
+                                                        <input type="text" 
+                                                            className="form-control" 
+                                                            id="DeveloperId" 
+                                                            name="DeveloperId" 
+                                                            placeholder="e:g Example"
+                                                            onChange={handelChange}
                                                         />
-                                                    </FormControl>
+                                                        <span className="text-danger"><small>{error.DeveloperId!=="" && error.DeveloperId}</small></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                    <FormControl fullWidth className={classes.margin} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Mile Stone Title</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-amount"
-                                                            labelWidth={150}
-                                                        />
-                                                    </FormControl>
-                                                    <TextField
-                                                        className={classes.margin}
-                                                        fullWidth
-                                                        id="outlined-multiline-static"
-                                                        label="Description"
-                                                        multiline
-                                                        rows={2}
-                                                        variant="outlined"
-                                                    />
-                                                </div>
+                                            {milestone.map((milestoneName , index) => {
+                                                
+                                                return(
+                                                    <div key={index} style={{marginBottom:"2%"}}>
+                                                        <Card className={classes.root}>
+                                                            
+                                                            <CardActions disableSpacing>
+                                                                    
+                                                                    <Typography>
+                                                                        {"Milestone"+(index+1)}
+                                                                    </Typography>
+                                                                
+                                                                    {index!==0 && <IconButton 
+                                                                        className={classes.delete}
+                                                                        onClick={_=>{deleteMileStone(index)}}
+                                                                    >
+                                                                        <DeleteOutlineIcon/>
+                                                                    </IconButton>}
+                                                                    <IconButton
+                                                                        className={clsx(classes.expand, {
+                                                                            [classes.expandOpen]: (index+1)===expanded ? true : false,
+                                                                        })}
+                                                                        onClick={()=>{handleExpandClick(index+1)}}
+                                                                        aria-expanded={(index+1)===expanded ? true : false}
+                                                                        aria-label="show more"
+                                                                    >
+                                                                        <ExpandMoreIcon />
+                                                                    </IconButton>
+                                                            </CardActions>
+                                                            <Collapse in={(index+1)===expanded ? true : false} timeout="auto" unmountOnExit >
+                                                            
+                                                                    <div style={{marginInline:"2%"}}>
+                                                                        <div className="form-group">
+                                                                            {/* <label for="exampleFormControlInput1">Milestone{index+1} Title</label> */}
+                                                                            <input type="text" 
+                                                                                className="form-control" 
+                                                                                name="name" 
+                                                                                id="name" 
+                                                                                placeholder={`Milestone ${index+1} Title`}
+                                                                                onChange={e=>{editMilestone(e,index)}}
+                                                                            />
+                                                                        </div>
+                                                                        <div className="form-group">
+                                                                            {/* <label for="exampleFormControlTextarea1">{"Milestone"+(index+1)+" Description"}</label> */}
+                                                                            <textarea 
+                                                                                className="form-control" 
+                                                                                name="description" 
+                                                                                id="description" 
+                                                                                rows="3" 
+                                                                                placeholder={`Milestone ${index+1}Description`}
+                                                                                onChange={e=>{editMilestone(e,index)}}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                            </Collapse>
+                                                        </Card>
+                                                        <span className="text-danger"><small>{error.milestone.includes(index)&&"Please Enter Milestone Details"}</small></span>
+                                                    </div>
+                                                )
+                                            })}
+                                            
                                                 <div className="text-center">
                                                     <Button
                                                         variant="contained"
                                                         color="secondary"
                                                         className={classes.margin}
                                                         startIcon={<AddIcon />}
+                                                        onClick={addMilestone}
                                                     >
                                                         Add Milestone
                                                     </Button>
@@ -259,6 +443,8 @@ export default function (props) {
                                                         color="primary"
                                                         className={classes.margin}
                                                         startIcon={<AddIcon />}
+                                                        onClick= {handelSubmit}
+                                                        disabled = {error.title==="" && error.clientId==="" && error.totalValue==="" && error.DeveloperId==="" ? false : true}
                                                     >
                                                         create
                                                     </Button>
