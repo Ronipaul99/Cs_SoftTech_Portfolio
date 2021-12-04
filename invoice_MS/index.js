@@ -4,9 +4,13 @@ const path = require('path');
 const homeRoutes = require('./routes/home-routes');
 const bodyParser = require('body-parser');
 var cors = require('cors')
+const fileUpload = require('express-fileupload');
+
+
 // const cors = require("cors")
 const app = express();
 app.use(cors())
+app.use(fileUpload());
 // app.use(cors())
 app.use(bodyParser.json());
 

@@ -43,6 +43,17 @@ const createDoc = (infor) => {
         })
     })
 }
+const uploadDoc = (docName) => {
+    return collection.getDocCollection().then(userDB => {
+        return userDB.create(docName).then(new_doc => {
+            if (new_doc) {
+                return new_doc
+            } else {
+                return null
+            }
+        })
+    })
+}
 const getDoc = (userId) => {
     console.log(userId);
 
@@ -117,5 +128,6 @@ const generatePdf = async (req, res, next) => {
 
 module.exports = {
     createDoc,
-    getDoc
+    getDoc,
+    uploadDoc
 }

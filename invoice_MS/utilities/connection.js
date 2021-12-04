@@ -7,7 +7,7 @@ Mongoose.Promise = global.Promise;
 
 
 
-let permissionSchema = Schema({
+let invoiceSchema = Schema({
     "user_ID": String,
     "Company_Name": String,
     "Street_Address": String,
@@ -24,22 +24,30 @@ let permissionSchema = Schema({
     "TOTAL_AMOUNT": Number,
     "subTotal": Number
 }, { collection: "Invoice" })
-
+let docSchema=Schema({
+    "doc_name": String
+},{collection: "Documents"})
 let config = ""
 let collection = {};
 const url = "mongodb://localhost:27017/Softech";
 collection.getInvoiceCollection = () => {
-    console.log(url)
     return Mongoose.connect(url, { useNewUrlParser: true }).then((database) => {
-        console.log("test2")
-        return database.model('Invoice', permissionSchema)
+        return database.model('Invoice', invoiceSchema)
     }).catch((error) => {
-        let err = new Error("Could not connect to Database USER");
+        let err = new Error("Could not connect to Database Softech");
         err.status = 500;
         throw err;
     })
 }
-
+collection.getDocCollection = () => {
+    return Mongoose.connect(url, { useNewUrlParser: true }).then((database) => {
+        return database.model('Documents', docSchema)
+    }).catch((error) => {
+        let err = new Error("Could not connect to Database Softech");
+        err.status = 500;
+        throw err;
+    })
+}
 
 module.exports = collection;
 
