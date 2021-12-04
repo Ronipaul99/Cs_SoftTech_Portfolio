@@ -1,1 +1,0 @@
-# starter-pack-with-react-and-webpack
