@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import FolderOpen from '@material-ui/icons/FolderOpen';
 import ShowDocs from "./ShowDocs"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import App from './uploadDocs/src/App'
+import App from './uploadDocs/src/App';
+import UploadedDocs from './ShowUploadedDocs';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -65,11 +66,8 @@ export default function Docket() {
                         </div>
                         :
                         <div className="text-center">
-                            <ArrowBackIcon style={{
-                                display: "flex",
-                                alignItems: "left"
-                            }} onClick={back} /><br />
-                            Working in progress</div>
+                            <UploadedDocs setDocs={setDocs}></UploadedDocs>
+                            </div>
                 :
                 <div>
 

@@ -22,4 +22,4 @@ app.use('/docs', express.static(path.join(__dirname, 'docs')));
 app.use('/',homeRoutes);
 
 
-app.listen(3000, () => console.log('App is listening on url http://localhost:3000/download'));
+app.listen(3000, () => console.log('App is listening on url http://localhost:3000/yourRoutePath'));

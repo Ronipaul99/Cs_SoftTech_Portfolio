@@ -62,7 +62,7 @@ export default function ShowDocs({ setDocs, invoices }) {
                                         </CardContent>
                                         <CardActions >
                                             <Button size="small" onClick={generatePdf}>View</Button>
-                                            <Button size="small">Download</Button>
+                                            
                                         </CardActions>
                                     </Card>
                                 </Grid>
