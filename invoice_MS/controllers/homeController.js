@@ -32,6 +32,7 @@ function generateFileName(data) {
 // console.log(data);
 const createDoc = (infor) => {
     data.push(infor);
+    console.log(infor);
     generatePdf()
     return collection.getInvoiceCollection().then(userDB => {
         return userDB.create(infor).then(new_doc => {
