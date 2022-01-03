@@ -16,7 +16,7 @@ export default function (props) {
                     <CircularProgress style={{ marginTop:"15%" , marginLeft:"48%" , alignItems:"center" }}/>
                 </div>
                 :
-                <div className="text-center" style={{height:"400px" , alignContent:"left"}}>
+                <div className="text-center" style={{minHeight:"400px" , alignContent:"left"}}>
                     <Docket></Docket>
                 </div>
             }

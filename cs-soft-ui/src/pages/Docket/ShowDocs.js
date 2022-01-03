@@ -4,8 +4,10 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import Typography from '@material-ui/core/Typography';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Box } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import IconButton from '@material-ui/core/IconButton';
 //
-import Invoice from './ShowDoc/Invoice';
+import Invoice from './ShowDoc/NewInvoice';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -22,6 +24,9 @@ export default function ShowDocs({ setDocs, invoices }) {
         setDocs(false)
     }
     const generatePdf = (data) => {
+        
+        setInvoice(data)
+        console.log("test",invoice);
         setShowDoc(true)
     }
 
@@ -29,7 +34,7 @@ export default function ShowDocs({ setDocs, invoices }) {
         <div>
             {showDoc ?
                 <div className="text-center" >
-                    <Invoice></Invoice>
+                    <Invoice setShowDoc={setShowDoc} invoice={invoice}></Invoice>
                 </div >
                 :
                 <div className={classes.root}>
@@ -57,11 +62,11 @@ export default function ShowDocs({ setDocs, invoices }) {
                                                 {data.PROJECT_DESCRIPTION}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                                Date: 24/10/2021
+                                                {data.Company_Name}
                                             </Typography>
                                         </CardContent>
                                         <CardActions >
-                                            <Button size="small" onClick={generatePdf}>View</Button>
+                                            <Button size="small" onClick={()=>{generatePdf(data)}}>View</Button>
                                             
                                         </CardActions>
                                     </Card>

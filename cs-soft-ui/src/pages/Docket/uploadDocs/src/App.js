@@ -3,9 +3,9 @@ import FileUpload from './components/FileUpload';
 import './App.css';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const App = ({setDocs}) => {
+const App = ({setUploadStatus}) => {
   const back = () => {
-    setDocs(false)
+    setUploadStatus(false)
   }
   return(
     <div className='container mt-4'>
