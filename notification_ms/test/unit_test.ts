@@ -47,12 +47,22 @@ test.serial('POST /:id/mark-as-read', async (t) => {
   t.is(record?.is_seen, true);
 });
 
-test.serial('DELETE /:id', async (t) => {
+test.serial('POST /:id/mark-as-read returns 404', async (t) => {
+  const res = await request(app).post('/1969kjx/mark-as-read');
+  t.is(res.status, 404);
+});
+
+test.serial('DELETE /:id deletes a notification', async (t) => {
   const res = await request(app).delete('/1969kjy');
   t.is(res.status, 200);
 
   const records = await Notification.find();
   t.is(records.length, 1);
+});
+
+test.serial('DELETE /:id returns 404', async (t) => {
+  const res = await request(app).delete('/1969kjx');
+  t.is(res.status, 404);
 });
 
 test.after.always(async (t) => {
