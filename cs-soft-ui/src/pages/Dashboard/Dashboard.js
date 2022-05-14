@@ -17,6 +17,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 //
 import Dashboard_Home from "./dashboard_components";
+import Badge from "@material-ui/core/Badge";
 import Project from "../Projects";
 import Docs from "../Docket";
 import Task from "../Task";
@@ -26,7 +27,8 @@ import Notification from "../Notification";
 import Account from "../Account";
 import Settings from "../Settings";
 //
-import Popover from "@mui/material/Popover";
+import { Popover } from "@material-ui/core";
+// import Popover from "@mui/material/Popover";
 import Button from "@mui/material/Button";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AssignmentIcon from "@material-ui/icons/Assignment";
@@ -99,7 +101,12 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  typography: {
+    padding: theme.spacing(2),
+  },
 }));
+
+const popoverStyle = { cursor: "pointer" };
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -113,6 +120,25 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [notificationCount, setNotificationCount] = useState(3);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openPop = Boolean(anchorEl);
+  const id = openPop ? "simple-popover" : undefined;
+
+  const updateNotificationCount = () =>
+    notificationCount > 0
+      ? setNotificationCount(notificationCount - 1)
+      : setNotificationCount(notificationCount);
 
   return (
     <div className={classes.root}>
@@ -137,14 +163,79 @@ export default function Dashboard() {
           <Typography variant="h6" noWrap>
             Cs-Softech
           </Typography>
-
-          <NotificationsIcon
-            button
-            style={{ fontSize: "30px", marginLeft: "80%", cursor: "pointer" }}
-            onClick={() => {
-              setpage("Notification");
+          <Button
+            aria-describedby={id}
+            variant=""
+            color="primary"
+            onClick={handleClick}
+            style={{
+              fontSize: "30px",
+              marginLeft: "80%",
+              cursor: "pointer",
             }}
-          />
+          >
+            <IconButton
+              // onClick={() => {
+              //   notificationCount > 0
+              //     ? setNotificationCount(notificationCount - 1)
+              //     : setNotificationCount(notificationCount);
+              // }}
+              aria-label="show 3 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={notificationCount} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Button>
+          <Popover
+            id={id}
+            open={openPop}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <Typography
+              style={popoverStyle}
+              onClick={() => {
+                setpage("Notification");
+                handleClose();
+                updateNotificationCount();
+              }}
+              className={classes.typography}
+            >
+              Advanced settings
+            </Typography>
+            <Typography
+              style={popoverStyle}
+              onClick={() => {
+                setpage("Notification");
+                handleClose();
+                updateNotificationCount();
+              }}
+              className={classes.typography}
+            >
+              Advanced settings
+            </Typography>
+            <Typography
+              style={popoverStyle}
+              onClick={() => {
+                setpage("Notification");
+                handleClose();
+                updateNotificationCount();
+              }}
+              className={classes.typography}
+            >
+              Advanced settings
+            </Typography>
+          </Popover>
         </Toolbar>
       </AppBar>
 

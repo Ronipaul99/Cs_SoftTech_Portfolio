@@ -33,12 +33,12 @@ export default function NotificationPage(props) {
   const [spin, setSpin] = useState(false);
   const [notification, setNotification] = useState(data);
 
-  // useEffect(() => {
-  //   setSpin(true);
-  //   setTimeout(() => {
-  //     setSpin(false);
-  //   }, 500);
-  // }, []);
+  useEffect(() => {
+    setSpin(true);
+    setTimeout(() => {
+      setSpin(false);
+    }, 2000);
+  }, []);
 
   const markAllAsRead = () => {};
   return (
@@ -63,7 +63,7 @@ export default function NotificationPage(props) {
       {spin ? (
         <div
           className="spinner"
-          //style={{ height: "400px", alignContent: "center" }}
+          style={{ height: "400px", alignContent: "center" }}
         >
           <CircularProgress
             style={{
@@ -74,20 +74,21 @@ export default function NotificationPage(props) {
           />
         </div>
       ) : (
-        <Box
-        // sx={{
-        //   marginLeft: "auto",
-        //   marginRight: "auto",
-        //   maxWidth: 640,
-        // }}
-        >
-          <List
-
-          // onClick={() => {
-          //   alert("detected");
+        <>
+          <Box
+          // sx={{
+          //   marginLeft: "auto",
+          //   marginRight: "auto",
+          //   maxWidth: 640,
           // }}
           >
-            {/* {[1, 2, 3].map((e, i) => (
+            <List
+
+            // onClick={() => {
+            //   alert("detected");
+            // }}
+            >
+              {/* {[1, 2, 3].map((e, i) => (
               <React.Fragment>
                 <NotificationItem key={i} item={e} activeElement={e} />
 
@@ -95,7 +96,7 @@ export default function NotificationPage(props) {
               </React.Fragment>
             ))} */}
 
-            {/* <>
+              {/* <>
               <NotificationItem activeElement={1} />
               <Divider variant="inset" component="li" />
             </>
@@ -107,10 +108,11 @@ export default function NotificationPage(props) {
               <NotificationItem activeElement={3} />
               <Divider variant="inset" component="li" />
             </> */}
-          </List>
-        </Box>
+            </List>
+          </Box>
+          <ControlledAccordions />
+        </>
       )}
-      <ControlledAccordions />
     </div>
   );
 }
@@ -136,6 +138,10 @@ const ControlledAccordions = () => {
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
+          onClick={() => {
+            isSeen.includes(1) ? setIsSeen(isSeen) : setIsSeen([...isSeen, 1]);
+            console.log(isSeen);
+          }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -145,15 +151,7 @@ const ControlledAccordions = () => {
             <Avatar>
               <Icon>notifications</Icon>
             </Avatar>
-            <div
-              onClick={() => {
-                isSeen.includes(1)
-                  ? setIsSeen(isSeen)
-                  : setIsSeen([...isSeen, 1]);
-                console.log(isSeen);
-              }}
-              style={{ color: "#A9A9A9", marginLeft: "12px" }}
-            >
+            <div style={{ color: "#A9A9A9", marginLeft: "12px" }}>
               <div
                 style={
                   isSeen.includes(1) ? { color: "#000" } : { color: "#A9A9A9" }
@@ -195,6 +193,10 @@ const ControlledAccordions = () => {
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
+          onClick={() => {
+            isSeen.includes(2) ? setIsSeen(isSeen) : setIsSeen([...isSeen, 2]);
+            console.log(isSeen);
+          }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -205,15 +207,7 @@ const ControlledAccordions = () => {
               <Icon>notifications</Icon>
             </Avatar>
 
-            <div
-              onClick={() => {
-                isSeen.includes(2)
-                  ? setIsSeen(isSeen)
-                  : setIsSeen([...isSeen, 2]);
-                console.log(isSeen);
-              }}
-              style={{ color: "#A9A9A9", marginLeft: "12px" }}
-            >
+            <div style={{ color: "#A9A9A9", marginLeft: "12px" }}>
               <div
                 style={
                   isSeen.includes(2) ? { color: "#000" } : { color: "#A9A9A9" }
@@ -256,6 +250,10 @@ const ControlledAccordions = () => {
         <Accordion
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
+          onClick={() => {
+            isSeen.includes(3) ? setIsSeen(isSeen) : setIsSeen([...isSeen, 3]);
+            console.log(isSeen);
+          }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -265,15 +263,7 @@ const ControlledAccordions = () => {
             <Avatar>
               <Icon>notifications</Icon>
             </Avatar>
-            <div
-              onClick={() => {
-                isSeen.includes(3)
-                  ? setIsSeen(isSeen)
-                  : setIsSeen([...isSeen, 3]);
-                console.log(isSeen);
-              }}
-              style={{ color: "#A9A9A9", marginLeft: "12px" }}
-            >
+            <div style={{ color: "#A9A9A9", marginLeft: "12px" }}>
               <div
                 style={
                   isSeen.includes(3) ? { color: "#000" } : { color: "#A9A9A9" }
